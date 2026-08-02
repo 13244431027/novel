@@ -408,6 +408,20 @@
   }
   input[type="range"] { flex: 1; }
 
+  /* ============ Key 列表样式 ============ */
+  .key-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg);
+    border-radius: 8px;
+  }
+  .key-info { flex: 1; min-width: 0; }
+  .key-meta { display: flex; align-items: center; gap: 8px; }
+  .key-label { font-weight: 500; font-size: 13px; color: var(--text); }
+  .key-masked { font-size: 12px; color: var(--text-sub); font-family: monospace; margin-top: 2px; word-break: break-all; }
+
   /* ============ Toast ============ */
   .toast {
     position: fixed; top: 80px; left: 50%;
@@ -494,11 +508,25 @@
     <div class="settings-panel">
 
       <div class="setting-item">
-        <div class="setting-label">🔑 API Key（可选，提高配额）</div>
-        <div class="setting-control">
-          <input type="text" id="api-key" placeholder="留空使用匿名访问">
-          <button class="btn" onclick="saveSettings()">保存</button>
+        <div class="setting-label">
+          🔑 API Key 池
+          <span style="font-size:12px;color:var(--text-sub);margin-left:6px;">
+            共 <span id="key-count">0</span> 个 · <span id="key-avail">0</span> 可用
+          </span>
         </div>
+        <div class="setting-control" style="gap:6px;">
+          <input type="text" id="api-key-input" placeholder="粘贴新 Key 后点击添加" style="flex:1;">
+          <input type="text" id="api-key-label" placeholder="备注（可选）" style="flex:0 0 140px;">
+          <button class="btn" onclick="addNewKey()">➕ 添加</button>
+        </div>
+        <div style="font-size:12px;color:var(--text-sub);margin-top:6px;line-height:1.6;">
+          💡 支持多个 Key，自动轮询。网络错误、429 限流、额度耗尽时会自动切换到下一个 Key。
+        </div>
+      </div>
+
+      <div class="setting-item">
+        <div class="setting-label">📋 Key 列表</div>
+        <div id="key-list" style="display:flex;flex-direction:column;gap:6px;"></div>
       </div>
 
       <div class="setting-item">
@@ -583,15 +611,23 @@
 
 <script>
 /* ===================================================================
- *  小说阅读网站 - 核心逻辑
+ *  小说阅读网站 - 核心逻辑（支持 API Key 轮询池）
  *  后端: https://apione.apibyte.cn/novelsearch
  * ================================================================ */
 
 const API_BASE = 'https://apione.apibyte.cn/novelsearch';
 
+// 触发"换 Key 重试"的错误码（HTTP / 业务码）
+const RETRY_HTTP_CODES = [408, 425, 429, 500, 502, 503, 504];
+const RETRY_ERROR_CODES = [429, 500, 502, 503, 504];
+const QUOTA_EXHAUSTED_CODES = [429];
+const QUOTA_EXHAUSTED_KEYWORDS = ['额度', 'quota', 'limit', 'exhausted', 'rate limit', 'too many'];
+
 // ---------- 状态 ----------
 const state = {
-  apiKey: localStorage.getItem('api_key') || '',
+  // apiKey 已废弃，改用 keyPool
+  keyPool: loadKeyPool(),
+
   theme: localStorage.getItem('theme') || 'light',
   fontSize: +(localStorage.getItem('font_size') || 18),
   lineHeight: +(localStorage.getItem('line_height') || 1.8),
@@ -601,8 +637,116 @@ const state = {
   book: null,            // { book_id, source, title, author, cover, chapters, chapterIndex }
   chapterContent: '',
   shelf: JSON.parse(localStorage.getItem('shelf') || '[]'),
-  history: JSON.parse(localStorage.getItem('history') || '[]')
+  history: JSON.parse(localStorage.getItem('history') || '[]'),
+
+  // Key 池调度
+  _roundRobinIdx: 0
 };
+
+/* ---------- Key Pool 存储 ----------
+ * 结构: [{ id, key, label, addedAt, cooldownUntil, dead, failCount }]
+ * - cooldownUntil: 临时熔断时间戳（毫秒），到期后自动恢复
+ * - dead: 永久下线（需用户手动 ↻ 恢复）
+ * - failCount: 连续失败次数（用于指数退避）
+ */
+function loadKeyPool() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('key_pool') || '[]');
+    if (Array.isArray(raw) && raw.length) return raw;
+
+    // 兼容旧版本：把单个 api_key 迁移成第一个 Key
+    const legacy = localStorage.getItem('api_key');
+    if (legacy) {
+      const migrated = [{
+        id: 'k_' + Date.now(),
+        key: legacy,
+        label: '默认 Key',
+        addedAt: Date.now(),
+        cooldownUntil: 0,
+        dead: false,
+        failCount: 0
+      }];
+      localStorage.setItem('key_pool', JSON.stringify(migrated));
+      return migrated;
+    }
+    return [];
+  } catch {
+    return [];
+  }
+}
+
+function saveKeyPool() {
+  localStorage.setItem('key_pool', JSON.stringify(state.keyPool));
+}
+
+// 轮询选择一个当前可用的 Key（跳过 dead / 冷却中）
+function pickKey() {
+  if (!state.keyPool.length) return null;
+  const now = Date.now();
+  const n = state.keyPool.length;
+
+  for (let i = 0; i < n; i++) {
+    const idx = (state._roundRobinIdx + i) % n;
+    const item = state.keyPool[idx];
+    if (item.dead) continue;
+    if (item.cooldownUntil && item.cooldownUntil > now) continue;
+    state._roundRobinIdx = (idx + 1) % n;
+    return item;
+  }
+  return null;
+}
+
+// 标记某个 Key 失败（设置冷却 / 永久下线）
+function markKeyFailed(keyId, opts = {}) {
+  const item = state.keyPool.find(k => k.id === keyId);
+  if (!item) return;
+  item.failCount = (item.failCount || 0) + 1;
+
+  if (opts.quotaExhausted) {
+    // 额度耗尽：临时下线 5 分钟
+    item.cooldownUntil = Date.now() + 5 * 60 * 1000;
+  } else if (opts.dead) {
+    // 永久错误（401/403）：下线，需用户手动恢复
+    item.dead = true;
+  } else {
+    // 普通网络错误：指数退避 30s → 60s → 120s → ... → 上限 5 分钟
+    const backoff = Math.min(30 * 1000 * Math.pow(2, item.failCount - 1), 5 * 60 * 1000);
+    item.cooldownUntil = Date.now() + backoff;
+  }
+  saveKeyPool();
+}
+
+// 重置某个 Key 状态（恢复可用）
+function resetKey(keyId) {
+  const item = state.keyPool.find(k => k.id === keyId);
+  if (!item) return;
+  item.failCount = 0;
+  item.cooldownUntil = 0;
+  item.dead = false;
+  saveKeyPool();
+}
+
+function removeKey(keyId) {
+  state.keyPool = state.keyPool.filter(k => k.id !== keyId);
+  saveKeyPool();
+}
+
+function addKey(key, label = '') {
+  const trimmed = (key || '').trim();
+  if (!trimmed) return { ok: false, reason: 'empty' };
+  if (state.keyPool.some(k => k.key === trimmed)) return { ok: false, reason: 'duplicate' };
+  state.keyPool.push({
+    id: 'k_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+    key: trimmed,
+    label: label.trim() || `Key ${state.keyPool.length + 1}`,
+    addedAt: Date.now(),
+    cooldownUntil: 0,
+    dead: false,
+    failCount: 0
+  });
+  saveKeyPool();
+  return { ok: true };
+}
 
 // ---------- DOM 工具 ----------
 const $ = id => document.getElementById(id);
@@ -617,20 +761,87 @@ const escapeHtml = s => String(s || '').replace(/[&<>"']/g, c => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
 }[c]));
 
-// ---------- API 调用 ----------
+// ---------- API 调用（自动换 Key 重试） ----------
 async function apiCall(params) {
-  const url = new URL(API_BASE);
-  Object.entries(params).forEach(([k, v]) => {
-    if (v !== undefined && v !== null && v !== '') url.searchParams.set(k, v);
-  });
-  const headers = {};
-  if (state.apiKey) headers['X-Api-Key'] = state.apiKey;
+  const totalKeys = state.keyPool.length;
+  // 至少尝试一轮（无 Key 时使用匿名）
+  const maxTries = Math.max(totalKeys, 1);
+  let lastErr = null;
 
-  const resp = await fetch(url, { headers });
-  if (!resp.ok) throw new Error('HTTP ' + resp.status);
-  const json = await resp.json();
-  if (!json || json.code !== 200) throw new Error(json.msg || '请求失败');
-  return json.data;
+  for (let attempt = 0; attempt < maxTries; attempt++) {
+    const keyItem = pickKey();
+
+    try {
+      const url = new URL(API_BASE);
+      Object.entries(params).forEach(([k, v]) => {
+        if (v !== undefined && v !== null && v !== '') url.searchParams.set(k, v);
+      });
+      const headers = {};
+      if (keyItem) headers['X-Api-Key'] = keyItem.key;
+
+      let resp;
+      try {
+        resp = await fetch(url, { headers });
+      } catch (networkErr) {
+        // fetch 抛错：网络错误
+        if (keyItem) markKeyFailed(keyItem.id, {});
+        if (attempt < maxTries - 1) continue;
+        throw new Error('网络错误：' + (networkErr.message || '无法连接'));
+      }
+
+      // HTTP 层错误
+      if (!resp.ok) {
+        const retriable = RETRY_HTTP_CODES.includes(resp.status);
+        if (keyItem) {
+          if (resp.status === 401 || resp.status === 403) {
+            markKeyFailed(keyItem.id, { dead: true });
+          } else if (resp.status === 429) {
+            markKeyFailed(keyItem.id, { quotaExhausted: true });
+          } else if (retriable) {
+            markKeyFailed(keyItem.id, {});
+          }
+        }
+        if (retriable && attempt < maxTries - 1 && keyItem) continue;
+        if (retriable && attempt < maxTries - 1 && !keyItem && totalKeys === 0) continue;
+        throw new Error('HTTP ' + resp.status);
+      }
+
+      const json = await resp.json();
+
+      // 业务层错误
+      if (!json || json.code !== 200) {
+        const code = json?.code;
+        const msg = String(json?.msg || '').toLowerCase();
+        const isQuota = QUOTA_EXHAUSTED_CODES.includes(code) ||
+                        QUOTA_EXHAUSTED_KEYWORDS.some(k => msg.includes(k));
+
+        if (keyItem) {
+          if (code === 401 || code === 403) markKeyFailed(keyItem.id, { dead: true });
+          else if (isQuota) markKeyFailed(keyItem.id, { quotaExhausted: true });
+          else markKeyFailed(keyItem.id, {});
+        }
+
+        const retriable = RETRY_ERROR_CODES.includes(code) || isQuota;
+        if (retriable && attempt < maxTries - 1 && keyItem) continue;
+        if (retriable && attempt < maxTries - 1 && !keyItem && totalKeys === 0) continue;
+
+        throw new Error(json?.msg || `请求失败 (code ${code || 'unknown'})`);
+      }
+
+      // 成功：重置失败计数
+      if (keyItem) {
+        keyItem.failCount = 0;
+        keyItem.cooldownUntil = 0;
+        saveKeyPool();
+      }
+      return json.data;
+
+    } catch (err) {
+      lastErr = err;
+      if (attempt >= maxTries - 1) throw err;
+    }
+  }
+  throw lastErr || new Error('所有 Key 均不可用');
 }
 
 // ---------- 页面切换 ----------
@@ -641,9 +852,8 @@ function goPage(name) {
 
   if (name === 'shelf') renderShelf();
   if (name === 'history') renderHistory();
-  if (name === 'settings') renderSettings();
+  if (name === 'settings') { renderSettings(); renderKeyList(); }
   if (name === 'search' && !state._searched) {
-    // 首次进入搜索页自动聚焦
     setTimeout(() => $('search-input').focus(), 100);
   }
 }
@@ -663,7 +873,7 @@ async function doSearch() {
     const data = await apiCall({ action: 'search', q, source });
     const books = data.books || [];
     $('search-status').textContent = `共找到 ${data.total} 条结果`;
-    renderBooks(books, $('search-results'), /*source*/ 'search');
+    renderBooks(books, $('search-results'), 'search');
     state._searched = true;
   } catch (e) {
     $('search-status').textContent = '搜索失败：' + e.message;
@@ -675,7 +885,7 @@ async function doSearch() {
 }
 
 // ---------- 渲染书籍卡片 ----------
-function renderBooks(books, container, source) {
+function renderBooks(books, container) {
   if (!books.length) {
     container.innerHTML = '<div class="empty"><div class="empty-icon">📭</div>暂无数据</div>';
     return;
@@ -811,18 +1021,13 @@ function renderShelf() {
     grid.innerHTML = '<div class="empty"><div class="empty-icon">📚</div>书架空空如也<br><small>在搜索页点击「加入书架」收藏喜欢的小说</small></div>';
     return;
   }
-  // 排序：最近添加的在前
   const sorted = [...state.shelf].sort((a, b) => (b.addedAt || 0) - (a.addedAt || 0));
   const data = sorted.map(b => ({
     title: b.title, author: b.author, cover: b.cover, abstract: b.abstract,
     book_id: b.book_id, source: b.source, _progress: true
   }));
   renderBooks(data, grid);
-  // 给卡片绑定正确的 source（renderBooks 用了硬编码 source 字段的标识）
-  // 这里使用 _book 对象存储完整信息，data 已包含 source
 }
-
-// 修复：renderBooks 中点击调用了 openBook(book_id, source)，但 source 来自 b.source —— 我们的数据里已有 source，没问题。
 
 // ---------- 阅读 ----------
 async function startReading() { openChapterByIndex(state.book.chapterIndex); }
@@ -869,7 +1074,6 @@ function nextChapter() { if (state.book && state.book.chapterIndex < state.book.
 
 function closeReader() {
   syncShelfProgress();
-  // 返回上一页面（搜索/书架/历史）
   if (state._returnPage) goPage(state._returnPage);
   else goPage('search');
 }
@@ -915,7 +1119,6 @@ function addHistory() {
   if (!state.book) return;
   const cur = state.book.chapterIndex;
   const ch = state.book.chapters[cur];
-  // 去重（同一本书只保留最新）
   state.history = state.history.filter(h => !(h.book_id === state.book.book_id && h.source === state.book.source));
   state.history.unshift({
     book_id: state.book.book_id,
@@ -1018,16 +1221,98 @@ function updateLineHeight(v) {
 }
 
 function renderSettings() {
-  $('api-key').value = state.apiKey;
   applyTheme();
   applyReadingStyle();
 }
 
-function saveSettings() {
-  state.apiKey = $('api-key').value.trim();
-  localStorage.setItem('api_key', state.apiKey);
-  toast('已保存 ✓');
+// ---------- Key 列表 UI ----------
+function renderKeyList() {
+  const list = $('key-list');
+  const now = Date.now();
+  const avail = state.keyPool.filter(k =>
+    !k.dead && (!k.cooldownUntil || k.cooldownUntil <= now)
+  ).length;
+
+  $('key-count').textContent = state.keyPool.length;
+  $('key-avail').textContent = avail;
+
+  if (!state.keyPool.length) {
+    list.innerHTML = '<div style="color:var(--text-sub);font-size:13px;padding:10px 0;">未配置任何 Key，将使用匿名访问（配额较低）。建议添加 1~3 个 Key 以获得稳定体验。</div>';
+    return;
+  }
+
+  list.innerHTML = state.keyPool.map(k => {
+    let badge = '<span style="color:#10b981;">● 可用</span>';
+    let cooldownText = '';
+
+    if (k.dead) {
+      badge = '<span style="color:#ef4444;">● 已下线</span>';
+    } else if (k.cooldownUntil && k.cooldownUntil > now) {
+      const remainMs = k.cooldownUntil - now;
+      const sec = Math.ceil(remainMs / 1000);
+      const mm = Math.floor(sec / 60);
+      const ss = sec % 60;
+      badge = `<span style="color:#f59e0b;">● 冷却中</span>`;
+      cooldownText = `<span style="color:#f59e0b;font-size:12px;margin-left:6px;">${mm}:${ss.toString().padStart(2,'0')} 后恢复</span>`;
+    }
+
+    const masked = k.key.length > 12
+      ? k.key.slice(0, 4) + '•••••••' + k.key.slice(-4)
+      : '••••••••';
+
+    const canReset = k.dead || (k.cooldownUntil && k.cooldownUntil > now);
+
+    return `
+      <div class="key-row">
+        <div class="key-info">
+          <div class="key-meta">
+            <span class="key-label">${escapeHtml(k.label)}</span>
+            ${badge}
+            ${cooldownText}
+          </div>
+          <div class="key-masked">${escapeHtml(masked)}</div>
+        </div>
+        <button class="icon-btn" title="恢复" onclick="resetKeyById('${k.id}');renderKeyList();" ${!canReset ? 'disabled style="opacity:.4"' : ''}>↻</button>
+        <button class="icon-btn" title="删除" onclick="removeKeyById('${k.id}')">🗑</button>
+      </div>
+    `;
+  }).join('');
 }
+
+function resetKeyById(keyId) {
+  resetKey(keyId);
+  toast('已恢复 ✓');
+}
+
+function removeKeyById(keyId) {
+  if (!confirm('确认删除该 Key？')) return;
+  removeKey(keyId);
+  renderKeyList();
+  toast('已删除');
+}
+
+function addNewKey() {
+  const input = $('api-key-input');
+  const labelInput = $('api-key-label');
+  const result = addKey(input.value, labelInput.value);
+  if (!result.ok) {
+    if (result.reason === 'duplicate') toast('该 Key 已存在');
+    else toast('请输入有效的 Key');
+    return;
+  }
+  input.value = '';
+  labelInput.value = '';
+  renderKeyList();
+  toast('已添加 ✓');
+}
+
+// 冷却倒计时：每秒刷新一次（仅在设置页生效）
+setInterval(() => {
+  const settingsPage = $('page-settings');
+  if (settingsPage && settingsPage.classList.contains('active')) {
+    renderKeyList();
+  }
+}, 1000);
 
 // ---------- 主题/字体 chip 点击 ----------
 document.addEventListener('click', e => {
@@ -1058,6 +1343,7 @@ document.addEventListener('keydown', e => {
   applyTheme();
   applyReadingStyle();
   updateShelfCount();
+  renderKeyList();
   $('search-input').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
 
   // 自动恢复上次页面（仅恢复主页面，不含阅读器）
@@ -1065,13 +1351,11 @@ document.addEventListener('keydown', e => {
   if (last && ['shelf', 'history', 'settings'].includes(last)) goPage(last);
 })();
 
-// 记录最后访问页面
+// 记录最后访问页面 & 返回页面
 const _origGoPage = goPage;
 window.goPage = function(name) {
   if (['shelf', 'history', 'settings', 'search'].includes(name)) {
     localStorage.setItem('last_page', name);
-  }
-  if (['search', 'shelf', 'history', 'settings'].includes(name)) {
     state._returnPage = name;
   }
   _origGoPage(name);
