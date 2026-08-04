@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📖 小说阅读站</title>
+<style>
+:root {
+  --bg: #f5f5f5;
+  --card: #fff;
+  --text: #333;
+  --text2: #666;
+  --accent: #4a90d9;
+  --accent2: #2c5282;
+  --border: #e0e0e0;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --radius: 12px;
+}
+[data-theme="dark"] {
+  --bg: #1a1a2e;
+  --card: #16213e;
+  --text: #e0e0e0;
+  --text2: #a0a0a0;
+  --accent: #0f3460;
+  --accent2: #533483;
+  --border: #2a2a4a;
+  --shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+[data-theme="green"] {
+  --bg: #c7edcc;
+  --card: #d4f0d4;
+  --text: #2d3436;
+  --text2: #555;
+  --accent: #27ae60;
+  --accent2: #1e8449;
+  --border: #a8d8a8;
+  --shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.3s;
+  min-height: 100vh;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+
+/* Header */
+.header {
+  background: var(--card);
+  padding: 16px 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.header h1 {
+  font-size: 1.5em;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+.btn-danger { background: #e74c3c; color: #fff; border-color: #e74c3c; }
+
+/* Search */
+.search-bar {
+  background: var(--card);
+  padding: 20px 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.search-bar input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 16px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.3s;
+}
+.search-bar input:focus { border-color: var(--accent); }
+.search-bar select {
+  padding: 10px 16px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+  min-width: 150px;
+}
+
+/* Views */
+.view { display: none; }
+.view.active { display: block; }
+
+/* Source list */
+.source-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.source-card {
+  background: var(--card);
+  padding: 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.source-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.source-card.active { border-color: var(--accent); background: rgba(74,144,217,0.05); }
+.source-card h3 { font-size: 1em; margin-bottom: 4px; }
+.source-card p { font-size: 0.85em; color: var(--text2); }
+.source-card .badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75em;
+  background: var(--accent);
+  color: #fff;
+  margin-top: 6px;
+}
+
+/* Book list */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+.book-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.book-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+.book-card .cover {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3em;
+  color: var(--text2);
+}
+.book-card .info { padding: 12px; }
+.book-card .info h3 {
+  font-size: 0.95em;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.book-card .info p {
+  font-size: 0.8em;
+  color: var(--text2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Book detail */
+.book-detail {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.book-detail .cover-wrap {
+  flex-shrink: 0;
+  width: 180px;
+}
+.book-detail .cover-wrap img,
+.book-detail .cover-wrap .placeholder {
+  width: 100%;
+  height: 240px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4em;
+  color: var(--text2);
+}
+.book-detail .meta { flex: 1; min-width: 250px; }
+.book-detail .meta h2 { font-size: 1.5em; margin-bottom: 8px; }
+.book-detail .meta .author { color: var(--accent); margin-bottom: 12px; font-size: 1.1em; }
+.book-detail .meta .intro {
+  color: var(--text2);
+  line-height: 1.8;
+  margin-bottom: 16px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Chapter list */
+.chapter-list {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-height: 600px;
+  overflow-y: auto;
+}
+.chapter-list .chapter-item {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.chapter-list .chapter-item:hover { background: rgba(74,144,217,0.05); }
+.chapter-list .chapter-item:last-child { border-bottom: none; }
+
+/* Reader */
+.reader {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 2;
+  font-size: 18px;
+}
+.reader h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.5em;
+}
+.reader .content p {
+  text-indent: 2em;
+  margin-bottom: 1em;
+}
+.reader-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.reader-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-top: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text2);
+}
+.loading .spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  z-index: 9999;
+  transition: transform 0.3s;
+  font-size: 14px;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.modal-overlay.show { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.modal h2 { margin-bottom: 16px; }
+.modal .source-url-input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+}
+.modal .source-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  background: var(--bg);
+}
+
+/* Stats */
+.stats {
+  background: var(--card);
+  padding: 16px 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.stats .stat-item { text-align: center; }
+.stats .stat-item .num { font-size: 1.5em; font-weight: bold; color: var(--accent); }
+.stats .stat-item .label { font-size: 0.85em; color: var(--text2); }
+
+/* Font size controls */
+.reader-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .container { padding: 8px; }
+  .header { padding: 12px 16px; }
+  .header h1 { font-size: 1.2em; }
+  .search-bar { padding: 12px 16px; }
+  .book-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+  .book-card .cover { height: 160px; }
+  .reader { padding: 20px; font-size: 16px; }
+  .book-detail { padding: 16px; }
+  .book-detail .cover-wrap { width: 120px; }
+  .book-detail .cover-wrap img,
+  .book-detail .cover-wrap .placeholder { height: 160px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1>📖 小说阅读站</h1>
+    <div class="header-actions">
+      <button class="btn" onclick="showView('home')">🏠 首页</button>
+      <button class="btn" onclick="showSourceModal()">📚 书源管理</button>
+      <button class="btn" onclick="showImportModal()">📥 导入</button>
+      <button class="btn" onclick="cycleTheme()">🎨 主题</button>
+      <button class="btn" onclick="showShelf()">📖 书架</button>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats" id="statsBar">
+    <div class="stat-item"><div class="num" id="sourceCount">0</div><div class="label">书源数</div></div>
+    <div class="stat-item"><div class="num" id="shelfCount">0</div><div class="label">书架数</div></div>
+    <div class="stat-item"><div class="num" id="searchCount">0</div><div class="label">今日搜索</div></div>
+    <div class="stat-item"><div class="num" id="readTime">0</div><div class="label">阅读分钟</div></div>
+  </div>
+
+  <!-- Home View -->
+  <div class="view active" id="view-home">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="搜索小说名称..." onkeydown="if(event.key==='Enter')doSearch()">
+      <select id="sourceSelect"></select>
+      <button class="btn btn-primary" onclick="doSearch()">🔍 搜索</button>
+    </div>
+    <div id="searchResults"></div>
+  </div>
+
+  <!-- Book Detail View -->
+  <div class="view" id="view-detail">
+    <button class="btn" onclick="showView('home')" style="margin-bottom:16px">← 返回搜索</button>
+    <div id="bookDetail"></div>
+  </div>
+
+  <!-- Chapter View -->
+  <div class="view" id="view-chapters">
+    <button class="btn" onclick="showView('detail')" style="margin-bottom:16px">← 返回详情</button>
+    <div class="chapter-list" id="chapterList"></div>
+  </div>
+
+  <!-- Reader View -->
+  <div class="view" id="view-reader">
+    <div class="reader-nav">
+      <button class="btn" onclick="prevChapter()">⏮ 上一章</button>
+      <div class="reader-controls">
+        <button class="btn" onclick="changeFontSize(-2)">A-</button>
+        <span id="fontSizeDisplay">18px</span>
+        <button class="btn" onclick="changeFontSize(2)">A+</button>
+        <button class="btn" onclick="showView('chapters')">📑 目录</button>
+        <button class="btn" onclick="addToShelf()">⭐ 收藏</button>
+      </div>
+      <button class="btn" onclick="nextChapter()">下一章 ⏭</button>
+    </div>
+    <div class="reader" id="readerContent">
+      <div class="loading"><div class="spinner"></div>加载中...</div>
+    </div>
+    <div class="reader-footer">
+      <button class="btn" onclick="prevChapter()">⏮ 上一章</button>
+      <span id="chapterTitle" style="color:var(--text2)"></span>
+      <button class="btn" onclick="nextChapter()">下一章 ⏭</button>
+    </div>
+  </div>
+
+  <!-- Shelf View -->
+  <div class="view" id="view-shelf">
+    <h2 style="margin-bottom:16px">📖 我的书架</h2>
+    <div class="book-grid" id="shelfGrid"></div>
+  </div>
+
+  <!-- Sources View -->
+  <div class="view" id="view-sources">
+    <h2 style="margin-bottom:16px">📚 书源列表</h2>
+    <div class="source-grid" id="sourceGrid"></div>
+  </div>
+</div>
+
+<!-- Source Modal -->
+<div class="modal-overlay" id="sourceModal">
+  <div class="modal">
+    <h2>📚 书源管理</h2>
+    <p style="color:var(--text2);margin-bottom:12px">添加或移除书源URL（支持 Legado JSON 格式）</p>
+    <input type="text" class="source-url-input" id="newSourceUrl" placeholder="输入书源 JSON URL...">
+    <button class="btn btn-primary" onclick="addSource()" style="margin-bottom:16px;width:100%">➕ 添加书源</button>
+    <div id="sourceList" style="margin-bottom:16px"></div>
+    <button class="btn" onclick="loadDefaultSources()" style="margin-bottom:8px;width:100%">🔄 加载默认书源</button>
+    <button class="btn" onclick="exportSources()" style="margin-bottom:8px;width:100%">📤 导出书源</button>
+    <button class="btn btn-danger" onclick="clearAllSources()" style="width:100%">🗑 清空所有书源</button>
+    <button class="btn" onclick="closeModal('sourceModal')" style="margin-top:12px;width:100%">关闭</button>
+  </div>
+</div>
+
+<!-- Import Modal -->
+<div class="modal-overlay" id="importModal">
+  <div class="modal">
+    <h2>📥 导入书源</h2>
+    <p style="color:var(--text2);margin-bottom:12px">直接粘贴 JSON 格式的书源数据</p>
+    <textarea class="source-url-input" id="importData" style="height:200px;resize:vertical" placeholder="粘贴 Legado 书源 JSON 数组..."></textarea>
+    <button class="btn btn-primary" onclick="importSources()" style="margin-top:12px;width:100%">导入</button>
+    <button class="btn" onclick="closeModal('importModal')" style="margin-top:8px;width:100%">关闭</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============ State ============
+let state = {
+  sources: [],
+  allSources: [],
+  currentSource: null,
+  currentBook: null,
+  currentChapterIdx: 0,
+  chapters: [],
+  shelf: JSON.parse(localStorage.getItem('novelShelf') || '[]'),
+  theme: localStorage.getItem('novelTheme') || 'light',
+  fontSize: parseInt(localStorage.getItem('novelFontSize') || '18'),
+  sourceUrls: JSON.parse(localStorage.getItem('novelSourceUrls') || '[]'),
+  purifyRules: [],
+  tocRules: [],
+  searchCount: parseInt(localStorage.getItem('novelSearchCount') || '0'),
+  readMinutes: parseInt(localStorage.getItem('novelReadMinutes') || '0')
+};
+
+const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+const DEFAULT_SOURCES = [
+  'https://cdn.jsdelivr.net/gh/tickmao/Novel@master/sources/legado/full.json',
+  'https://cdn.jsdelivr.net/gh/tickmao/Novel@master/rules/legado/purify.json',
+  'https://cdn.jsdelivr.net/gh/tickmao/Novel@master/rules/legado/toc.json'
+];
+
+// ============ Init ============
+document.documentElement.setAttribute('data-theme', state.theme);
+updateStats();
+
+// ============ CORS Fetch ============
+async function corsFetch(url) {
+  try {
+    const resp = await fetch(CORS_PROXY + encodeURIComponent(url));
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return await resp.text();
+  } catch (e) {
+    console.error('Fetch error:', url, e);
+    throw e;
+  }
+}
+
+// ============ Load Sources ============
+async function loadSourcesFromUrls(urls) {
+  showToast('正在加载书源...');
+  let loaded = 0;
+  for (const url of urls) {
+    try {
+      const text = await corsFetch(url);
+      const data = JSON.parse(text);
+      if (Array.isArray(data)) {
+        if (url.includes('purify')) {
+          state.purifyRules = state.purifyRules.concat(data);
+        } else if (url.includes('toc')) {
+          state.tocRules = state.tocRules.concat(data);
+        } else {
+          data.forEach(src => {
+            src._url = url;
+            if (src.enabled !== false) {
+              state.allSources.push(src);
+            }
+          });
+        }
+        loaded++;
+      }
+    } catch (e) {
+      console.warn('Failed to load source:', url, e);
+    }
+  }
+  state.sources = state.allSources;
+  updateSourceSelect();
+  updateStats();
+  showToast(`成功加载 ${loaded} 个书源，共 ${state.allSources.length} 个站点`);
+}
+
+async function loadDefaultSources() {
+  closeModal('sourceModal');
+  await loadSourcesFromUrls(DEFAULT_SOURCES);
+  if (!state.sourceUrls.includes(DEFAULT_SOURCES[0])) {
+    state.sourceUrls = [...state.sourceUrls, ...DEFAULT_SOURCES];
+    localStorage.setItem('novelSourceUrls', JSON.stringify(state.sourceUrls));
+  }
+}
+
+// ============ Rule Parser ============
+function parseLegadoRule(ruleStr, html, baseUrl) {
+  if (!ruleStr || ruleStr.trim() === '') return '';
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  let parts = ruleStr.split('##');
+  let selectorPart = parts[0];
+  let replaceRegex = parts[1] || '';
+  
+  // Handle {{ }} template
+  selectorPart = selectorPart.replace(/\{\{([^}]+)\}\}/g, (m, expr) => {
+    return evalJS(expr);
+  });
+
+  let results = [];
+  const segments = selectorPart.split('@@');
+  
+  for (const seg of segments) {
+    const result = parseSingleSelector(seg.trim(), doc, baseUrl);
+    results.push(result);
+  }
+  
+  let finalResult = results.join('');
+  
+  // Apply regex replacement
+  if (replaceRegex) {
+    try {
+      const regexParts = replaceRegex.match(/^\/(.+)\/([gims]*)$/);
+      if (regexParts) {
+        const regex = new RegExp(regexParts[1], regexParts[2]);
+        finalResult = finalResult.replace(regex, '');
+      } else {
+        // Handle complex replacement
+        finalResult = finalResult.replace(new RegExp(replaceRegex.split('|')[0], 'g'), '');
+      }
+    } catch(e) {}
+  }
+  
+  return finalResult.trim();
+}
+
+function parseSingleSelector(selector, doc, baseUrl) {
+  if (!selector) return '';
+  
+  // Handle @js:
+  if (selector.startsWith('@js:')) {
+    return evalJS(selector.substring(4));
+  }
+  
+  // Handle XPath
+  if (selector.startsWith('//')) {
+    return evalXPath(selector, doc);
+  }
+  
+  // Handle chained selectors with @
+  const parts = selector.split('@');
+  let elements = [doc];
+  let result = '';
+  
+  for (let i = 0; i < parts.length; i++) {
+    const part = parts[i].trim();
+    if (!part) continue;
+    
+    if (part === 'text') {
+      result = elements.map(el => el ? (el.textContent || '').trim() : '').join('');
+      elements = [];
+      break;
+    } else if (part === 'html') {
+      result = elements.map(el => el ? el.innerHTML : '').join('');
+      elements = [];
+      break;
+    } else if (part === 'href' || part === 'src' || part.startsWith('data-')) {
+      result = elements.map(el => {
+        if (!el) return '';
+        let val = el.getAttribute(part) || '';
+        if (val && baseUrl && !val.startsWith('http') && !val.startsWith('//')) {
+          try {
+            val = new URL(val, baseUrl).href;
+          } catch(e) {}
+        }
+        return val;
+      }).join('');
+      elements = [];
+      break;
+    } else {
+      // CSS selector part
+      let cssSelector = part;
+      let indexMatch = cssSelector.match(/\.(\d+)$/);
+      let idx = -1;
+      if (indexMatch) {
+        idx = parseInt(indexMatch[1]);
+        cssSelector = cssSelector.replace(/\.\d+$/, '');
+      }
+      
+      // Convert Legado syntax to CSS
+      cssSelector = cssSelector
+        .replace(/^class\./, '.')
+        .replace(/^id\./, '#')
+        .replace(/^tag\./, '');
+      
+      let newElements = [];
+      elements.forEach(el => {
+        if (!el || !el.querySelectorAll) return;
+        try {
+          const found = el.querySelectorAll(cssSelector);
+          if (idx >= 0) {
+            if (found[idx]) newElements.push(found[idx]);
+          } else {
+            found.forEach(f => newElements.push(f));
+          }
+        } catch(e) {
+          // Fallback: try as tag
+          const found = el.getElementsByTagName(cssSelector);
+          if (idx >= 0) {
+            if (found[idx]) newElements.push(found[idx]);
+          } else {
+            Array.from(found).forEach(f => newElements.push(f));
+          }
+        }
+      });
+      elements = newElements;
+    }
+  }
+  
+  if (result === '' && elements.length > 0) {
+    result = elements.map(el => el ? (el.textContent || '').trim() : '').join('');
+  }
+  
+  return result;
+}
+
+function evalXPath(xpath, doc) {
+  try {
+    const result = doc.evaluate(xpath, doc, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+    let texts = [];
+    for (let i = 0; i < result.snapshotLength; i++) {
+      const node = result.snapshotItem(i);
+      texts.push(node.textContent || '');
+    }
+    return texts.join('');
+  } catch(e) {
+    return '';
+  }
+}
+
+function evalJS(code) {
+  try {
+    return Function('"use strict"; return (' + code + ')')();
+  } catch(e) {
+    return '';
+  }
+}
+
+// ============ Search ============
+async function doSearch() {
+  const keyword = document.getElementById('searchInput').value.trim();
+  if (!keyword) { showToast('请输入搜索关键词'); return; }
+  
+  const sourceIdx = document.getElementById('sourceSelect').value;
+  const source = state.sources[sourceIdx];
+  if (!source) { showToast('请选择书源'); return; }
+  
+  state.currentSource = source;
+  state.searchCount++;
+  localStorage.setItem('novelSearchCount', state.searchCount);
+  updateStats();
+  
+  const resultsDiv = document.getElementById('searchResults');
+  resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div>正在搜索 "' + escapeHtml(keyword) + '"...</div>';
+  
+  let searchUrl = source.searchUrl || '';
+  if (!searchUrl) {
+    resultsDiv.innerHTML = '<div class="loading">该书源不支持搜索</div>';
+    return;
+  }
+  
+  // Handle complex search URL (POST body etc)
+  let fetchUrl = searchUrl;
+  let fetchOptions = {};
+  
+  if (searchUrl.includes('{')) {
+    try {
+      // Try to parse as URL with options
+      const urlParts = searchUrl.split(',{');
+      fetchUrl = urlParts[0];
+      if (urlParts[1]) {
+        const opts = JSON.parse('{' + urlParts[1]);
+        if (opts.body) opts.body = opts.body.replace(/\{\{key\}\}/g, encodeURIComponent(keyword));
+        fetchOptions = opts;
+      }
+    } catch(e) {}
+  }
+  
+  fetchUrl = fetchUrl
+    .replace(/\{\{key\}\}/g, encodeURIComponent(keyword))
+    .replace(/\{\{page\}\}/g, '1');
+  
+  // Prepend base URL if relative
+  if (!fetchUrl.startsWith('http')) {
+    fetchUrl = (source.bookSourceUrl || '') + fetchUrl;
+  }
+  
+  try {
+    let html;
+    if (fetchOptions.method === 'POST') {
+      html = await corsFetchPost(fetchUrl, fetchOptions);
+    } else {
+      html = await corsFetch(fetchUrl);
+    }
+    
+    const ruleSearch = source.ruleSearch || {};
+    const bookListSelector = ruleSearch.bookList || '';
+    
+    if (!bookListSelector) {
+      resultsDiv.innerHTML = '<div class="loading">未定义搜索结果解析规则</div>';
+      return;
+    }
+    
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    let cssSelector = bookListSelector
+      .replace(/^class\./, '.')
+      .replace(/^id\./, '#');
+    
+    let bookElements = [];
+    try {
+      bookElements = Array.from(doc.querySelectorAll(cssSelector));
+    } catch(e) {
+      try {
+        bookElements = Array.from(doc.getElementsByTagName(cssSelector));
+      } catch(e2) {}
+    }
+    
+    if (bookElements.length === 0) {
+      resultsDiv.innerHTML = '<div class="loading">未找到相关书籍</div>';
+      return;
+    }
+    
+    const books = bookElements.map(el => {
+      const tempDoc = document.createElement('div');
+      tempDoc.appendChild(el.cloneNode(true));
+      
+      const name = parseLegadoRule(ruleSearch.name, tempDoc.innerHTML, source.bookSourceUrl);
+      const author = parseLegadoRule(ruleSearch.author, tempDoc.innerHTML, source.bookSourceUrl);
+      const intro = parseLegadoRule(ruleSearch.intro, tempDoc.innerHTML, source.bookSourceUrl);
+      const coverUrl = parseLegadoRule(ruleSearch.coverUrl, tempDoc.innerHTML, source.bookSourceUrl);
+      let bookUrl = parseLegadoRule(ruleSearch.bookUrl, tempDoc.innerHTML, source.bookSourceUrl);
+      
+      // Fix relative URLs
+      if (bookUrl && !bookUrl.startsWith('http') && source.bookSourceUrl) {
+        try { bookUrl = new URL(bookUrl, source.bookSourceUrl).href; } catch(e) {}
+      }
+      if (coverUrl && !coverUrl.startsWith('http') && source.bookSourceUrl) {
+        try { coverUrl = new URL(coverUrl, source.bookSourceUrl).href; } catch(e) {}
+      }
+      
+      return { name, author, intro, coverUrl, bookUrl, source };
+    }).filter(b => b.name);
+    
+    renderBooks(books);
+  } catch(e) {
+    console.error(e);
+    resultsDiv.innerHTML = '<div class="loading">搜索失败: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+async function corsFetchPost(url, options) {
+  try {
+    // allorigins might not support POST well, try direct or adapt
+    const proxyUrl = CORS_PROXY + encodeURIComponent(url);
+    const resp = await fetch(proxyUrl, {
+      method: options.method || 'GET',
+      headers: options.headers || {}
+    });
+    return await resp.text();
+  } catch(e) {
+    throw e;
+  }
+}
+
+// ============ Render Books ============
+function renderBooks(books) {
+  const resultsDiv = document.getElementById('searchResults');
+  if (!books || books.length === 0) {
+    resultsDiv.innerHTML = '<div class="loading">没有找到结果</div>';
+    return;
+  }
+  
+  let html = '<div class="book-grid">';
+  books.forEach((book, idx) => {
+    html += `<div class="book-card" onclick='showBookDetail(${JSON.stringify(book).replace(/'/g, "&#39;")})'>
+      <div class="cover">${book.coverUrl ? `<img src="${escapeHtml(book.coverUrl)}" onerror="this.parentElement.innerHTML='📚'">` : '📚'}</div>
+      <div class="info">
+        <h3>${escapeHtml(book.name)}</h3>
+        <p>${escapeHtml(book.author || '未知')}</p>
+      </div>
+    </div>`;
+  });
+  html += '</div>';
+  resultsDiv.innerHTML = html;
+}
+
+// ============ Book Detail ============
+async function showBookDetail(book) {
+  state.currentBook = book;
+  showView('detail');
+  
+  const detailDiv = document.getElementById('bookDetail');
+  detailDiv.innerHTML = `
+    <div class="cover-wrap">
+      ${book.coverUrl ? `<img src="${escapeHtml(book.coverUrl)}" onerror="this.outerHTML='<div class=placeholder>📚</div>'">` : '<div class="placeholder">📚</div>'}
+    </div>
+    <div class="meta">
+      <h2>${escapeHtml(book.name)}</h2>
+      <div class="author">✍️ ${escapeHtml(book.author || '未知作者')}</div>
+      <div class="intro">${escapeHtml(book.intro || '暂无简介')}</div>
+      <button class="btn btn-primary" onclick="loadChapters()">📑 加载目录</button>
+      <button class="btn" onclick="addToShelf()">⭐ 加入书架</button>
+    </div>
+  `;
+}
+
+// ============ Load Chapters ============
+async function loadChapters() {
+  if (!state.currentBook) return;
+  
+  showView('chapters');
+  const chapterListDiv = document.getElementById('chapterList');
+  chapterListDiv.innerHTML = '<div class="loading"><div class="spinner"></div>正在加载目录...</div>';
+  
+  const source = state.currentBook.source;
+  let bookUrl = state.currentBook.bookUrl;
+  
+  try {
+    const html = await corsFetch(bookUrl);
+    const ruleBookInfo = source.ruleBookInfo || {};
+    const ruleToc = source.ruleToc || {};
+    
+    // Get TOC URL if different from book URL
+    let tocUrl = ruleBookInfo.tocUrl ? parseLegadoRule(ruleBookInfo.tocUrl, html, bookUrl) : '';
+    if (tocUrl && !tocUrl.startsWith('http')) {
+      try { tocUrl = new URL(tocUrl, bookUrl).href; } catch(e) {}
+    }
+    
+    let tocHtml = html;
+    if (tocUrl) {
+      tocHtml = await corsFetch(tocUrl);
+    }
+    
+    const doc = new DOMParser().parseFromString(tocHtml, 'text/html');
+    const chapterListSelector = (ruleToc.chapterList || '').replace(/^class\./, '.').replace(/^id\./, '#');
+    
+    let chapterElements = [];
+    if (chapterListSelector) {
+      try {
+        chapterElements = Array.from(doc.querySelectorAll(chapterListSelector));
+      } catch(e) {
+        try {
+          chapterElements = Array.from(doc.getElementsByTagName(chapterListSelector));
+        } catch(e2) {}
+      }
+    }
+    
+    if (chapterElements.length === 0) {
+      // Fallback: look for links
+      chapterElements = Array.from(doc.querySelectorAll('a[href]'));
+    }
+    
+    const chapters = chapterElements.map(el => {
+      const nameSelector = ruleToc.chapterName || '';
+      const urlSelector = ruleToc.chapterUrl || 'a@href';
+      
+      let name = '';
+      if (nameSelector) {
+        const tempDoc = document.createElement('div');
+        tempDoc.appendChild(el.cloneNode(true));
+        name = parseLegadoRule(nameSelector, tempDoc.innerHTML, bookUrl);
+      } else {
+        name = el.textContent.trim();
+      }
+      
+      let url = '';
+      const tempDoc = document.createElement('div');
+      tempDoc.appendChild(el.cloneNode(true));
+      url = parseLegadoRule(urlSelector, tempDoc.innerHTML, bookUrl);
+      
+      if (!url) {
+        const a = el.tagName === 'A' ? el : el.querySelector('a');
+        if (a) url = a.getAttribute('href') || '';
+      }
+      
+      if (url && !url.startsWith('http')) {
+        try { url = new URL(url, bookUrl).href; } catch(e) {}
+      }
+      
+      return { name: name || '未知章节', url };
+    }).filter(c => c.name && c.name.length > 0 && c.url);
+    
+    state.chapters = chapters;
+    
+    if (chapters.length === 0) {
+      chapterListDiv.innerHTML = '<div class="loading">无法解析目录</div>';
+      return;
+    }
+    
+    chapterListDiv.innerHTML = chapters.map((ch, idx) => 
+      `<div class="chapter-item" onclick="readChapter(${idx})">${escapeHtml(ch.name)}</div>`
+    ).join('');
+    
+  } catch(e) {
+    console.error(e);
+    chapterListDiv.innerHTML = '<div class="loading">加载目录失败: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+// ============ Read Chapter ============
+async function readChapter(idx) {
+  state.currentChapterIdx = idx;
+  showView('reader');
+  
+  const readerDiv = document.getElementById('readerContent');
+  readerDiv.innerHTML = '<div class="loading"><div class="spinner"></div>正在加载内容...</div>';
+  document.getElementById('chapterTitle').textContent = state.chapters[idx]?.name || '';
+  
+  const chapter = state.chapters[idx];
+  if (!chapter) return;
+  
+  const source = state.currentBook.source;
+  const ruleContent = source.ruleContent || {};
+  
+  try {
+    const html = await corsFetch(chapter.url);
+    let content = '';
+    
+    if (ruleContent.content) {
+      content = parseLegadoRule(ruleContent.content, html, chapter.url);
+    }
+    
+    // Handle webJs
+    if (ruleContent.webJs) {
+      try {
+        eval(ruleContent.webJs);
+      } catch(e) {}
+    }
+    
+    // Handle nextContentUrl (multiple pages)
+    if (ruleContent.nextContentUrl) {
+      let nextUrl = parseLegadoRule(ruleContent.nextContentUrl, html, chapter.url);
+      let maxPages = 10;
+      while (nextUrl && maxPages > 0) {
+        try {
+          if (!nextUrl.startsWith('http')) {
+            nextUrl = new URL(nextUrl, chapter.url).href;
+          }
+          const nextHtml = await corsFetch(nextUrl);
+          const nextContent = parseLegadoRule(ruleContent.content, nextHtml, nextUrl);
+          if (nextContent) content += nextContent;
+          nextUrl = parseLegadoRule(ruleContent.nextContentUrl, nextHtml, nextUrl);
+          maxPages--;
+        } catch(e) {
+          break;
+        }
+      }
+    }
+    
+    // Apply purify rules
+    content = applyPurifyRules(content);
+    
+    // Apply content replace regex
+    if (ruleContent.replaceRegex) {
+      try {
+        const regex = new RegExp(ruleContent.replaceRegex, 'g');
+        content = content.replace(regex, '');
+      } catch(e) {}
+    }
+    
+    // Format content
+    content = formatContent(content);
+    
+    if (!content) {
+      readerDiv.innerHTML = '<div class="loading">无法加载章节内容</div>';
+      return;
+    }
+    
+    readerDiv.innerHTML = `<h1>${escapeHtml(chapter.name)}</h1><div class="content">${content}</div>`;
+    readerDiv.style.fontSize = state.fontSize + 'px';
+    document.getElementById('fontSizeDisplay').textContent = state.fontSize + 'px';
+    
+    // Track reading time
+    trackReading();
+    
+    // Scroll to top
+    window.scrollTo(0, 0);
+    
+  } catch(e) {
+    console.error(e);
+    readerDiv.innerHTML = '<div class="loading">加载失败: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+function formatContent(text) {
+  // Clean up HTML content
+  text = text.replace(/<br\s*\/?>/gi, '</p><p>');
+  text = text.replace(/<p[^>]*>/gi, '<p>');
+  text = text.replace(/<\/p>/gi, '</p>');
+  
+  // Remove empty paragraphs
+  text = text.replace(/<p>\s*<\/p>/g, '');
+  
+  // If no <p> tags, split by newlines
+  if (!text.includes('<p>')) {
+    const lines = text.split(/\n+/).filter(l => l.trim());
+    text = lines.map(l => '<p>' + escapeHtml(l.trim()) + '</p>').join('');
+  }
+  
+  return text;
+}
+
+function applyPurifyRules(content) {
+  state.purifyRules.forEach(rule => {
+    if (!rule.isEnabled) return;
+    if (rule.scopeContent) {
+      try {
+        if (rule.isRegex) {
+          const regex = new RegExp(rule.pattern, 'g');
+          if (rule.replacement && rule.replacement.startsWith('@js:')) {
+            content = content.replace(regex, () => {
+              const result = content;
+              return evalJS(rule.replacement.substring(4));
+            });
+          } else {
+            content = content.replace(regex, rule.replacement || '');
+          }
+        }
+      } catch(e) {}
+    }
+  });
+  return content;
+}
+
+// ============ Navigation ============
+function prevChapter() {
+  if (state.currentChapterIdx > 0) {
+    readChapter(state.currentChapterIdx - 1);
+  } else {
+    showToast('已经是第一章了');
+  }
+}
+
+function nextChapter() {
+  if (state.currentChapterIdx < state.chapters.length - 1) {
+    readChapter(state.currentChapterIdx + 1);
+  } else {
+    showToast('已经是最后一章了');
+  }
+}
+
+function changeFontSize(delta) {
+  state.fontSize = Math.max(12, Math.min(32, state.fontSize + delta));
+  localStorage.setItem('novelFontSize', state.fontSize);
+  const reader = document.getElementById('readerContent');
+  if (reader) reader.style.fontSize = state.fontSize + 'px';
+  document.getElementById('fontSizeDisplay').textContent = state.fontSize + 'px';
+}
+
+// ============ Shelf ============
+function addToShelf() {
+  if (!state.currentBook) return;
+  const exists = state.shelf.some(b => b.name === state.currentBook.name);
+  if (exists) {
+    showToast('已在书架中');
+    return;
+  }
+  state.shelf.push(state.currentBook);
+  localStorage.setItem('novelShelf', JSON.stringify(state.shelf));
+  updateStats();
+  showToast('已加入书架');
+}
+
+function showShelf() {
+  showView('shelf');
+  const grid = document.getElementById('shelfGrid');
+  if (state.shelf.length === 0) {
+    grid.innerHTML = '<div class="loading">书架空空如也</div>';
+    return;
+  }
+  grid.innerHTML = state.shelf.map((book, idx) => `
+    <div class="book-card" onclick='showBookDetail(${JSON.stringify(book).replace(/'/g, "&#39;")})'>
+      <div class="cover">${book.coverUrl ? `<img src="${escapeHtml(book.coverUrl)}" onerror="this.parentElement.innerHTML='📚'">` : '📚'}</div>
+      <div class="info">
+        <h3>${escapeHtml(book.name)}</h3>
+        <p>${escapeHtml(book.author || '未知')}</p>
+      </div>
+    </div>
+  `).join('') + `<div class="book-card" onclick="clearShelf()" style="display:flex;align-items:center;justify-content:center;background:var(--bg);border:2px dashed var(--border)">
+    <div class="info" style="text-align:center"><h3>🗑 清空书架</h3></div>
+  </div>`;
+}
+
+function clearShelf() {
+  if (confirm('确定清空书架？')) {
+    state.shelf = [];
+    localStorage.setItem('novelShelf', '[]');
+    showShelf();
+    updateStats();
+  }
+}
+
+// ============ UI Helpers ============
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name)?.classList.add('active');
+}
+
+function updateSourceSelect() {
+  const select = document.getElementById('sourceSelect');
+  select.innerHTML = state.sources.map((src, idx) => 
+    `<option value="${idx}">${escapeHtml(src.bookSourceName || '未知书源')}</option>`
+  ).join('');
+}
+
+function updateStats() {
+  document.getElementById('sourceCount').textContent = state.sources.length;
+  document.getElementById('shelfCount').textContent = state.shelf.length;
+  document.getElementById('searchCount').textContent = state.searchCount;
+  document.getElementById('readTime').textContent = state.readMinutes;
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function showModal(id) {
+  document.getElementById(id).classList.add('show');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('show');
+}
+function showSourceModal() {
+  renderSourceList();
+  showModal('sourceModal');
+}
+function showImportModal() {
+  showModal('importModal');
+}
+
+function renderSourceList() {
+  const list = document.getElementById('sourceList');
+  if (state.sourceUrls.length === 0) {
+    list.innerHTML = '<p style="color:var(--text2)">暂无书源URL</p>';
+    return;
+  }
+  list.innerHTML = state.sourceUrls.map((url, idx) => `
+    <div class="source-item">
+      <span style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1" title="${escapeHtml(url)}">${escapeHtml(url.split('/').pop())}</span>
+      <button class="btn btn-danger" onclick="removeSource(${idx})" style="padding:4px 8px;font-size:12px">删除</button>
+    </div>
+  `).join('');
+}
+
+async function addSource() {
+  const url = document.getElementById('newSourceUrl').value.trim();
+  if (!url) { showToast('请输入URL'); return; }
+  if (state.sourceUrls.includes(url)) { showToast('已存在'); return; }
+  
+  state.sourceUrls.push(url);
+  localStorage.setItem('novelSourceUrls', JSON.stringify(state.sourceUrls));
+  document.getElementById('newSourceUrl').value = '';
+  renderSourceList();
+  
+  showToast('正在加载...');
+  await loadSourcesFromUrls([url]);
+}
+
+function removeSource(idx) {
+  state.sourceUrls.splice(idx, 1);
+  localStorage.setItem('novelSourceUrls', JSON.stringify(state.sourceUrls));
+  renderSourceList();
+}
+
+function clearAllSources() {
+  if (!confirm('确定清空所有书源？')) return;
+  state.sourceUrls = [];
+  state.sources = [];
+  state.allSources = [];
+  state.purifyRules = [];
+  state.tocRules = [];
+  localStorage.setItem('novelSourceUrls', '[]');
+  renderSourceList();
+  updateSourceSelect();
+  updateStats();
+  showToast('已清空');
+}
+
+async function importSources() {
+  const text = document.getElementById('importData').value.trim();
+  if (!text) { showToast('请粘贴数据'); return; }
+  try {
+    const data = JSON.parse(text);
+    if (Array.isArray(data)) {
+      data.forEach(src => {
+        if (src.enabled !== false) state.allSources.push(src);
+      });
+      state.sources = state.allSources;
+      updateSourceSelect();
+      updateStats();
+      showToast(`成功导入 ${data.length} 个书源`);
+      closeModal('importModal');
+    }
+  } catch(e) {
+    showToast('JSON 解析失败');
+  }
+}
+
+function exportSources() {
+  const data = JSON.stringify(state.allSources, null, 2);
+  const blob = new Blob([data], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'book_sources.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('导出成功');
+}
+
+function cycleTheme() {
+  const themes = ['light', 'dark', 'green'];
+  const idx = themes.indexOf(state.theme);
+  state.theme = themes[(idx + 1) % themes.length];
+  localStorage.setItem('novelTheme', state.theme);
+  document.documentElement.setAttribute('data-theme', state.theme);
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function trackReading() {
+  const start = Date.now();
+  const interval = setInterval(() => {
+    if (!document.getElementById('view-reader').classList.contains('active')) {
+      clearInterval(interval);
+      return;
+    }
+    state.readMinutes = Math.round((Date.now() - start) / 60000);
+    localStorage.setItem('novelReadMinutes', state.readMinutes);
+    updateStats();
+  }, 60000);
+}
+
+// ============ Auto Load ============
+(async function init() {
+  if (state.sourceUrls.length > 0) {
+    await loadSourcesFromUrls(state.sourceUrls);
+  } else {
+    showToast('请先加载书源（点击右上角书源管理）');
+  }
+})();
+</script>
+</body>
+</html>
