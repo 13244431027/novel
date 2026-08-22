@@ -1,0 +1,1853 @@
+{
+  "fileName": "地狱公寓.txt",
+  "totalChapters": 167,
+  "encoding": "UTF-8",
+  "generatedAt": "2026-08-22T15:48:09.112Z",
+  "chapters": [
+    {
+      "index": 1,
+      "title": "第一章 诡异公寓",
+      "position": 47
+    },
+    {
+      "index": 2,
+      "title": "第二章 进入",
+      "position": 4399
+    },
+    {
+      "index": 3,
+      "title": "第三章 血字的规则",
+      "position": 8697
+    },
+    {
+      "index": 4,
+      "title": "第四章 水",
+      "position": 13185
+    },
+    {
+      "index": 5,
+      "title": "第五章 阿秀",
+      "position": 17012
+    },
+    {
+      "index": 6,
+      "title": "第六章 血腥的盛宴（一）",
+      "position": 21402
+    },
+    {
+      "index": 7,
+      "title": "第七章 血腥的盛宴（二）",
+      "position": 26388
+    },
+    {
+      "index": 8,
+      "title": "第八章 血腥的盛宴（三）",
+      "position": 30782
+    },
+    {
+      "index": 9,
+      "title": "第九章 血腥的盛宴（四）",
+      "position": 35640
+    },
+    {
+      "index": 10,
+      "title": "第十章 幽灵之水",
+      "position": 39012
+    },
+    {
+      "index": 11,
+      "title": "第十一章 无法触及的彼岸",
+      "position": 44089
+    },
+    {
+      "index": 12,
+      "title": "第十二章 真相",
+      "position": 48562
+    },
+    {
+      "index": 13,
+      "title": "第十三章 水中的恶灵",
+      "position": 53038
+    },
+    {
+      "index": 14,
+      "title": "第十四章 错过",
+      "position": 57220
+    },
+    {
+      "index": 15,
+      "title": "第一章 嬴子夜",
+      "position": 60265
+    },
+    {
+      "index": 16,
+      "title": "第二章 邪恶的注视",
+      "position": 64400
+    },
+    {
+      "index": 17,
+      "title": "第三章 “它”在哪里？（一）",
+      "position": 68705
+    },
+    {
+      "index": 18,
+      "title": "第四章 “它”在哪里？（二）",
+      "position": 73298
+    },
+    {
+      "index": 19,
+      "title": "第五章 “它”在哪里？（三）",
+      "position": 77634
+    },
+    {
+      "index": 20,
+      "title": "第六章 “它”在哪里？（四）",
+      "position": 81683
+    },
+    {
+      "index": 21,
+      "title": "第七章 生路",
+      "position": 85639
+    },
+    {
+      "index": 22,
+      "title": "第一章 捉迷藏",
+      "position": 90105
+    },
+    {
+      "index": 23,
+      "title": "第二章 血字指示的真正含义",
+      "position": 94078
+    },
+    {
+      "index": 24,
+      "title": "第三章 “鬼”和躲藏者（一）",
+      "position": 98968
+    },
+    {
+      "index": 25,
+      "title": "第四章 “鬼”和躲藏者（二）",
+      "position": 103371
+    },
+    {
+      "index": 26,
+      "title": "第五章 “鬼”和躲藏者（三）",
+      "position": 108980
+    },
+    {
+      "index": 27,
+      "title": "第六章 “鬼”和躲藏者（四）",
+      "position": 113395
+    },
+    {
+      "index": 28,
+      "title": "第七章 “鬼”和躲藏者（五）",
+      "position": 117962
+    },
+    {
+      "index": 29,
+      "title": "第八章 “鬼”和躲藏者（六）",
+      "position": 122053
+    },
+    {
+      "index": 30,
+      "title": "第九章 “鬼”和躲藏者（七）",
+      "position": 126248
+    },
+    {
+      "index": 31,
+      "title": "第一章 不要发誓",
+      "position": 130250
+    },
+    {
+      "index": 32,
+      "title": "第二章 日本的鬼屋",
+      "position": 134560
+    },
+    {
+      "index": 33,
+      "title": "第三章 小田切幸子的遗留物",
+      "position": 139418
+    },
+    {
+      "index": 34,
+      "title": "第四章 来找你们了",
+      "position": 142554
+    },
+    {
+      "index": 35,
+      "title": "第五章 找到了",
+      "position": 146657
+    },
+    {
+      "index": 36,
+      "title": "第六章 人偶师",
+      "position": 149971
+    },
+    {
+      "index": 37,
+      "title": "第七章 电话亭",
+      "position": 154157
+    },
+    {
+      "index": 38,
+      "title": "第八章 穿衣镜",
+      "position": 158062
+    },
+    {
+      "index": 39,
+      "title": "第九章 父亲的人偶",
+      "position": 161397
+    },
+    {
+      "index": 40,
+      "title": "第十章 毒誓应验",
+      "position": 165553
+    },
+    {
+      "index": 41,
+      "title": "第一章 新的血字，银月岛",
+      "position": 169007
+    },
+    {
+      "index": 42,
+      "title": "第二章 连城和伊莣",
+      "position": 172640
+    },
+    {
+      "index": 43,
+      "title": "第三章 登岛",
+      "position": 176391
+    },
+    {
+      "index": 44,
+      "title": "第四章 李隐的过去",
+      "position": 180697
+    },
+    {
+      "index": 45,
+      "title": "第五章 无解恐怖和生路",
+      "position": 186207
+    },
+    {
+      "index": 46,
+      "title": "第六章 迷雾重重",
+      "position": 190766
+    },
+    {
+      "index": 47,
+      "title": "第七章 危急！",
+      "position": 194787
+    },
+    {
+      "index": 48,
+      "title": "第八章 魔王级血字指示",
+      "position": 198903
+    },
+    {
+      "index": 49,
+      "title": "第九章 打火机",
+      "position": 201155
+    },
+    {
+      "index": 50,
+      "title": "第十章 死神来了？",
+      "position": 205374
+    },
+    {
+      "index": 51,
+      "title": "第十一章 谜底",
+      "position": 209506
+    },
+    {
+      "index": 52,
+      "title": "第十二章 回归与……最后的恐怖",
+      "position": 215976
+    },
+    {
+      "index": 53,
+      "title": "第一章 柯银夜，柯银羽",
+      "position": 220203
+    },
+    {
+      "index": 54,
+      "title": "第二章 地狱契约",
+      "position": 224027
+    },
+    {
+      "index": 55,
+      "title": "第三章 裂痕",
+      "position": 228082
+    },
+    {
+      "index": 56,
+      "title": "第四章 异变",
+      "position": 231161
+    },
+    {
+      "index": 57,
+      "title": "第五章 封印魔王的方法",
+      "position": 232985
+    },
+    {
+      "index": 58,
+      "title": "第六章 空无一人的小镇",
+      "position": 235959
+    },
+    {
+      "index": 59,
+      "title": "第七章 妖异之月",
+      "position": 240123
+    },
+    {
+      "index": 60,
+      "title": "第八章 异空间",
+      "position": 243026
+    },
+    {
+      "index": 61,
+      "title": "第九章 小丑出现",
+      "position": 246580
+    },
+    {
+      "index": 62,
+      "title": "第十章 憎恨之眼",
+      "position": 250824
+    },
+    {
+      "index": 63,
+      "title": "第十一章 魔王",
+      "position": 255433
+    },
+    {
+      "index": 64,
+      "title": "第十二章 血字的生路",
+      "position": 261150
+    },
+    {
+      "index": 65,
+      "title": "第十三章 十米……",
+      "position": 268463
+    },
+    {
+      "index": 66,
+      "title": "第十四章 因为是你……",
+      "position": 272832
+    },
+    {
+      "index": 67,
+      "title": "第一章 毁灭的序曲",
+      "position": 280417
+    },
+    {
+      "index": 68,
+      "title": "第二章 两道血字指示",
+      "position": 284362
+    },
+    {
+      "index": 69,
+      "title": "第三章 七名乘客",
+      "position": 288643
+    },
+    {
+      "index": 70,
+      "title": "第四章 消失",
+      "position": 291120
+    },
+    {
+      "index": 71,
+      "title": "第五章 手印",
+      "position": 295143
+    },
+    {
+      "index": 72,
+      "title": "第六章 十字",
+      "position": 298524
+    },
+    {
+      "index": 73,
+      "title": "第七章 镜子",
+      "position": 302807
+    },
+    {
+      "index": 74,
+      "title": "第八章 厉鬼的真面目",
+      "position": 305869
+    },
+    {
+      "index": 75,
+      "title": "第九章 李隐死了？",
+      "position": 310190
+    },
+    {
+      "index": 76,
+      "title": "第十章 决断",
+      "position": 313267
+    },
+    {
+      "index": 77,
+      "title": "第十一章 上？下？",
+      "position": 316205
+    },
+    {
+      "index": 78,
+      "title": "第十二章 索命鬼影",
+      "position": 320620
+    },
+    {
+      "index": 79,
+      "title": "第十三章 现形",
+      "position": 326160
+    },
+    {
+      "index": 80,
+      "title": "第十四章 无限循环",
+      "position": 330515
+    },
+    {
+      "index": 81,
+      "title": "第一章 兄弟",
+      "position": 335154
+    },
+    {
+      "index": 82,
+      "title": "第二章 短暂的宁静之日",
+      "position": 339769
+    },
+    {
+      "index": 83,
+      "title": "第三章 星辰和敏",
+      "position": 343245
+    },
+    {
+      "index": 84,
+      "title": "第四章 李隐的算计",
+      "position": 348700
+    },
+    {
+      "index": 85,
+      "title": "第五章 试探",
+      "position": 352446
+    },
+    {
+      "index": 86,
+      "title": "第六章 大年夜",
+      "position": 356916
+    },
+    {
+      "index": 87,
+      "title": "第七章 深雨",
+      "position": 360156
+    },
+    {
+      "index": 88,
+      "title": "第八章 未知者的忠告",
+      "position": 363840
+    },
+    {
+      "index": 89,
+      "title": "第九章 是真？是假？",
+      "position": 368138
+    },
+    {
+      "index": 90,
+      "title": "第十章 背后的是……（一）",
+      "position": 370824
+    },
+    {
+      "index": 91,
+      "title": "第十一章 背后的是……（二）",
+      "position": 374699
+    },
+    {
+      "index": 92,
+      "title": "第十二章 背后的是……（三）",
+      "position": 377313
+    },
+    {
+      "index": 93,
+      "title": "第十三章 背后的是……（四）",
+      "position": 380655
+    },
+    {
+      "index": 94,
+      "title": "第十四章 背后的是……（五）",
+      "position": 384724
+    },
+    {
+      "index": 95,
+      "title": "第十五章 恶魔之子",
+      "position": 388560
+    },
+    {
+      "index": 96,
+      "title": "第十六章 不能回头的理由",
+      "position": 392594
+    },
+    {
+      "index": 97,
+      "title": "第一章 布局，操控，制衡",
+      "position": 398513
+    },
+    {
+      "index": 98,
+      "title": "第二章 龙有逆鳞，触之即死！",
+      "position": 403300
+    },
+    {
+      "index": 99,
+      "title": "第三章 神秘来电",
+      "position": 407478
+    },
+    {
+      "index": 100,
+      "title": "第四章 不详的预感",
+      "position": 412736
+    },
+    {
+      "index": 101,
+      "title": "第五章 不要穿上它……",
+      "position": 417080
+    },
+    {
+      "index": 102,
+      "title": "第六章 和恶魔的交易",
+      "position": 422626
+    },
+    {
+      "index": 103,
+      "title": "第七章 夏渊的过去",
+      "position": 428298
+    },
+    {
+      "index": 104,
+      "title": "第八章 摇滚和生路",
+      "position": 435290
+    },
+    {
+      "index": 105,
+      "title": "第九章 来源",
+      "position": 440846
+    },
+    {
+      "index": 106,
+      "title": "第十章 星辰的发现",
+      "position": 446208
+    },
+    {
+      "index": 107,
+      "title": "第十一章 剪刀",
+      "position": 450300
+    },
+    {
+      "index": 108,
+      "title": "第十二章 选择",
+      "position": 455643
+    },
+    {
+      "index": 109,
+      "title": "第十三章 汹涌而来的魔性",
+      "position": 461118
+    },
+    {
+      "index": 110,
+      "title": "第十四章 不断接近的死神",
+      "position": 466414
+    },
+    {
+      "index": 111,
+      "title": "第一章 黑洞",
+      "position": 470608
+    },
+    {
+      "index": 112,
+      "title": "第二章 深渊",
+      "position": 476133
+    },
+    {
+      "index": 113,
+      "title": "第三章 五名新住户",
+      "position": 482275
+    },
+    {
+      "index": 114,
+      "title": "第四章 寻找六颗人头",
+      "position": 487915
+    },
+    {
+      "index": 115,
+      "title": "第五章 恐怖的断头魔",
+      "position": 493883
+    },
+    {
+      "index": 116,
+      "title": "第六章 三名嫌疑人",
+      "position": 500018
+    },
+    {
+      "index": 117,
+      "title": "第七章 手表和可疑的女子",
+      "position": 505400
+    },
+    {
+      "index": 118,
+      "title": "第八章 死亡时间？预知能力？",
+      "position": 511158
+    },
+    {
+      "index": 119,
+      "title": "第九章 照片",
+      "position": 516667
+    },
+    {
+      "index": 120,
+      "title": "第十章 扑朔迷离",
+      "position": 521033
+    },
+    {
+      "index": 121,
+      "title": "第十一章 渐近的黑暗",
+      "position": 526289
+    },
+    {
+      "index": 122,
+      "title": "第十二章 唐枫",
+      "position": 532020
+    },
+    {
+      "index": 123,
+      "title": "第十三章 半张脸",
+      "position": 536674
+    },
+    {
+      "index": 124,
+      "title": "第十四章 共同点",
+      "position": 541936
+    },
+    {
+      "index": 125,
+      "title": "第十五章 尹俊贤",
+      "position": 547339
+    },
+    {
+      "index": 126,
+      "title": "第十六章 手帕",
+      "position": 553248
+    },
+    {
+      "index": 127,
+      "title": "第十七章 最恐怖的假设",
+      "position": 558923
+    },
+    {
+      "index": 128,
+      "title": "第十八章 恶魔的条件",
+      "position": 564643
+    },
+    {
+      "index": 129,
+      "title": "第十九章 金色神国",
+      "position": 570196
+    },
+    {
+      "index": 130,
+      "title": "第二十章 重重谜团",
+      "position": 576010
+    },
+    {
+      "index": 131,
+      "title": "第二十一章 LD",
+      "position": 581900
+    },
+    {
+      "index": 132,
+      "title": "第二十二章 眼镜",
+      "position": 587546
+    },
+    {
+      "index": 133,
+      "title": "第二十三章 断头魔，不止一个？",
+      "position": 591929
+    },
+    {
+      "index": 134,
+      "title": "第二十四章 真正的恐怖开始",
+      "position": 597072
+    },
+    {
+      "index": 135,
+      "title": "第二十五章 伊莣的留言",
+      "position": 602402
+    },
+    {
+      "index": 136,
+      "title": "第二十六章 我相信你",
+      "position": 607754
+    },
+    {
+      "index": 137,
+      "title": "第二十七章 断头魔和六颗人头",
+      "position": 614209
+    },
+    {
+      "index": 138,
+      "title": "第二十八章 通向地狱的陷阱",
+      "position": 619445
+    },
+    {
+      "index": 139,
+      "title": "第二十九章 没有神存在的世界",
+      "position": 625896
+    },
+    {
+      "index": 140,
+      "title": "第三十章 生与死，最终的选择",
+      "position": 631536
+    },
+    {
+      "index": 141,
+      "title": "第三十一章 誓约",
+      "position": 638065
+    },
+    {
+      "index": 142,
+      "title": "第一章 诡秘的油画",
+      "position": 644621
+    },
+    {
+      "index": 143,
+      "title": "第二章 超级杀手“睡美人”",
+      "position": 650300
+    },
+    {
+      "index": 144,
+      "title": "第三章 为鬼魂送信",
+      "position": 655803
+    },
+    {
+      "index": 145,
+      "title": "第四章 多重生路的假设",
+      "position": 661589
+    },
+    {
+      "index": 146,
+      "title": "第五章 影子",
+      "position": 667481
+    },
+    {
+      "index": 147,
+      "title": "第六章 为了爱她而活",
+      "position": 671891
+    },
+    {
+      "index": 148,
+      "title": "第七章 进入月影，日冕馆",
+      "position": 676436
+    },
+    {
+      "index": 149,
+      "title": "第八章 第一封信",
+      "position": 681007
+    },
+    {
+      "index": 150,
+      "title": "第九章 幽冥彼方的爱",
+      "position": 686588
+    },
+    {
+      "index": 151,
+      "title": "第十章 恶魔",
+      "position": 691429
+    },
+    {
+      "index": 152,
+      "title": "第十一章 父女",
+      "position": 696537
+    },
+    {
+      "index": 153,
+      "title": "第十二章 黑暗中的探索",
+      "position": 702215
+    },
+    {
+      "index": 154,
+      "title": "第十三章 扭曲的逻辑",
+      "position": 707799
+    },
+    {
+      "index": 155,
+      "title": "第十四章 两封伪造的回信",
+      "position": 712789
+    },
+    {
+      "index": 156,
+      "title": "第十五章 慕容蜃和深雨",
+      "position": 717673
+    },
+    {
+      "index": 157,
+      "title": "第十六章 他的名字",
+      "position": 722794
+    },
+    {
+      "index": 158,
+      "title": "第十七章 血字的未知恐怖",
+      "position": 727768
+    },
+    {
+      "index": 159,
+      "title": "第十八章 真面目",
+      "position": 732714
+    },
+    {
+      "index": 160,
+      "title": "第十九章 不断失控的回信",
+      "position": 738597
+    },
+    {
+      "index": 161,
+      "title": "第二十章 生路？死路？",
+      "position": 743723
+    },
+    {
+      "index": 162,
+      "title": "第二十一章 被分隔的两人",
+      "position": 750369
+    },
+    {
+      "index": 163,
+      "title": "第二十二章 公寓隐藏的规则",
+      "position": 755511
+    },
+    {
+      "index": 164,
+      "title": "第二十三章 蒲靡灵的日记",
+      "position": 760858
+    },
+    {
+      "index": 165,
+      "title": "第十三章 恶魔的传承 第二十三章 骸骨",
+      "position": 956227
+    },
+    {
+      "index": 166,
+      "title": "第十四章 幽灵船 第十八章 诅咒的根源",
+      "position": 1063977
+    },
+    {
+      "index": 167,
+      "title": "第十五章 魔棺 第六章 四个人",
+      "position": 1097539
+    }
+  ],
+  "splitFiles": [
+    {
+      "fileName": "地狱公寓-章节前内容.txt",
+      "size": 59,
+      "sizeLabel": "59 Bytes",
+      "description": "章节开始前的内容"
+    },
+    {
+      "fileName": "第一章 诡异公寓.txt",
+      "size": 11364,
+      "sizeLabel": "11.1 KB",
+      "description": "章节 1-1"
+    },
+    {
+      "fileName": "第二章 进入.txt",
+      "size": 11358,
+      "sizeLabel": "11.09 KB",
+      "description": "章节 2-2"
+    },
+    {
+      "fileName": "第三章 血字的规则.txt",
+      "size": 12236,
+      "sizeLabel": "11.95 KB",
+      "description": "章节 3-3"
+    },
+    {
+      "fileName": "第四章 水.txt",
+      "size": 9911,
+      "sizeLabel": "9.68 KB",
+      "description": "章节 4-4"
+    },
+    {
+      "fileName": "第五章 阿秀.txt",
+      "size": 11844,
+      "sizeLabel": "11.57 KB",
+      "description": "章节 5-5"
+    },
+    {
+      "fileName": "第六章 血腥的盛宴（一）.txt",
+      "size": 13440,
+      "sizeLabel": "13.13 KB",
+      "description": "章节 6-6"
+    },
+    {
+      "fileName": "第七章 血腥的盛宴（二）.txt",
+      "size": 11808,
+      "sizeLabel": "11.53 KB",
+      "description": "章节 7-7"
+    },
+    {
+      "fileName": "第八章 血腥的盛宴（三）.txt",
+      "size": 12812,
+      "sizeLabel": "12.51 KB",
+      "description": "章节 8-8"
+    },
+    {
+      "fileName": "第九章 血腥的盛宴（四）.txt",
+      "size": 8278,
+      "sizeLabel": "8.08 KB",
+      "description": "章节 9-9"
+    },
+    {
+      "fileName": "第十章 幽灵之水.txt",
+      "size": 13313,
+      "sizeLabel": "13 KB",
+      "description": "章节 10-10"
+    },
+    {
+      "fileName": "第十一章 无法触及的彼岸.txt",
+      "size": 11575,
+      "sizeLabel": "11.3 KB",
+      "description": "章节 11-11"
+    },
+    {
+      "fileName": "第十二章 真相.txt",
+      "size": 11632,
+      "sizeLabel": "11.36 KB",
+      "description": "章节 12-12"
+    },
+    {
+      "fileName": "第十三章 水中的恶灵.txt",
+      "size": 11010,
+      "sizeLabel": "10.75 KB",
+      "description": "章节 13-13"
+    },
+    {
+      "fileName": "第十四章 错过.txt",
+      "size": 7637,
+      "sizeLabel": "7.46 KB",
+      "description": "章节 14-14"
+    },
+    {
+      "fileName": "第一章 嬴子夜.txt",
+      "size": 11109,
+      "sizeLabel": "10.85 KB",
+      "description": "章节 15-15"
+    },
+    {
+      "fileName": "第二章 邪恶的注视.txt",
+      "size": 11491,
+      "sizeLabel": "11.22 KB",
+      "description": "章节 16-16"
+    },
+    {
+      "fileName": "第三章 “它”在哪里？（一）.txt",
+      "size": 12329,
+      "sizeLabel": "12.04 KB",
+      "description": "章节 17-17"
+    },
+    {
+      "fileName": "第四章 “它”在哪里？（二）.txt",
+      "size": 11612,
+      "sizeLabel": "11.34 KB",
+      "description": "章节 18-18"
+    },
+    {
+      "fileName": "第五章 “它”在哪里？（三）.txt",
+      "size": 10441,
+      "sizeLabel": "10.2 KB",
+      "description": "章节 19-19"
+    },
+    {
+      "fileName": "第六章 “它”在哪里？（四）.txt",
+      "size": 10350,
+      "sizeLabel": "10.11 KB",
+      "description": "章节 20-20"
+    },
+    {
+      "fileName": "第七章 生路.txt",
+      "size": 12152,
+      "sizeLabel": "11.87 KB",
+      "description": "章节 21-21"
+    },
+    {
+      "fileName": "第一章 捉迷藏.txt",
+      "size": 10713,
+      "sizeLabel": "10.46 KB",
+      "description": "章节 22-22"
+    },
+    {
+      "fileName": "第二章 血字指示的真正含义.txt",
+      "size": 13594,
+      "sizeLabel": "13.28 KB",
+      "description": "章节 23-23"
+    },
+    {
+      "fileName": "第三章 “鬼”和躲藏者（一）.txt",
+      "size": 11685,
+      "sizeLabel": "11.41 KB",
+      "description": "章节 24-24"
+    },
+    {
+      "fileName": "第四章 “鬼”和躲藏者（二）.txt",
+      "size": 15317,
+      "sizeLabel": "14.96 KB",
+      "description": "章节 25-25"
+    },
+    {
+      "fileName": "第五章 “鬼”和躲藏者（三）.txt",
+      "size": 11505,
+      "sizeLabel": "11.24 KB",
+      "description": "章节 26-26"
+    },
+    {
+      "fileName": "第六章 “鬼”和躲藏者（四）.txt",
+      "size": 11923,
+      "sizeLabel": "11.64 KB",
+      "description": "章节 27-27"
+    },
+    {
+      "fileName": "第七章 “鬼”和躲藏者（五）.txt",
+      "size": 10771,
+      "sizeLabel": "10.52 KB",
+      "description": "章节 28-28"
+    },
+    {
+      "fileName": "第八章 “鬼”和躲藏者（六）.txt",
+      "size": 11071,
+      "sizeLabel": "10.81 KB",
+      "description": "章节 29-29"
+    },
+    {
+      "fileName": "第九章 “鬼”和躲藏者（七）.txt",
+      "size": 10618,
+      "sizeLabel": "10.37 KB",
+      "description": "章节 30-30"
+    },
+    {
+      "fileName": "第一章 不要发誓.txt",
+      "size": 11416,
+      "sizeLabel": "11.15 KB",
+      "description": "章节 31-31"
+    },
+    {
+      "fileName": "第二章 日本的鬼屋.txt",
+      "size": 12972,
+      "sizeLabel": "12.67 KB",
+      "description": "章节 32-32"
+    },
+    {
+      "fileName": "第三章 小田切幸子的遗留物.txt",
+      "size": 8374,
+      "sizeLabel": "8.18 KB",
+      "description": "章节 33-33"
+    },
+    {
+      "fileName": "第四章 来找你们了.txt",
+      "size": 10707,
+      "sizeLabel": "10.46 KB",
+      "description": "章节 34-34"
+    },
+    {
+      "fileName": "第五章 找到了.txt",
+      "size": 8924,
+      "sizeLabel": "8.71 KB",
+      "description": "章节 35-35"
+    },
+    {
+      "fileName": "第六章 人偶师.txt",
+      "size": 11424,
+      "sizeLabel": "11.16 KB",
+      "description": "章节 36-36"
+    },
+    {
+      "fileName": "第七章 电话亭.txt",
+      "size": 10523,
+      "sizeLabel": "10.28 KB",
+      "description": "章节 37-37"
+    },
+    {
+      "fileName": "第八章 穿衣镜.txt",
+      "size": 8669,
+      "sizeLabel": "8.47 KB",
+      "description": "章节 38-38"
+    },
+    {
+      "fileName": "第九章 父亲的人偶.txt",
+      "size": 10900,
+      "sizeLabel": "10.64 KB",
+      "description": "章节 39-39"
+    },
+    {
+      "fileName": "第十章 毒誓应验.txt",
+      "size": 9162,
+      "sizeLabel": "8.95 KB",
+      "description": "章节 40-40"
+    },
+    {
+      "fileName": "第一章 新的血字，银月岛.txt",
+      "size": 9957,
+      "sizeLabel": "9.72 KB",
+      "description": "章节 41-41"
+    },
+    {
+      "fileName": "第二章 连城和伊莣.txt",
+      "size": 9927,
+      "sizeLabel": "9.69 KB",
+      "description": "章节 42-42"
+    },
+    {
+      "fileName": "第三章 登岛.txt",
+      "size": 11388,
+      "sizeLabel": "11.12 KB",
+      "description": "章节 43-43"
+    },
+    {
+      "fileName": "第四章 李隐的过去.txt",
+      "size": 15036,
+      "sizeLabel": "14.68 KB",
+      "description": "章节 44-44"
+    },
+    {
+      "fileName": "第五章 无解恐怖和生路.txt",
+      "size": 12313,
+      "sizeLabel": "12.02 KB",
+      "description": "章节 45-45"
+    },
+    {
+      "fileName": "第六章 迷雾重重.txt",
+      "size": 10557,
+      "sizeLabel": "10.31 KB",
+      "description": "章节 46-46"
+    },
+    {
+      "fileName": "第七章 危急！.txt",
+      "size": 10906,
+      "sizeLabel": "10.65 KB",
+      "description": "章节 47-47"
+    },
+    {
+      "fileName": "第八章 魔王级血字指示.txt",
+      "size": 5786,
+      "sizeLabel": "5.65 KB",
+      "description": "章节 48-48"
+    },
+    {
+      "fileName": "第九章 打火机.txt",
+      "size": 11347,
+      "sizeLabel": "11.08 KB",
+      "description": "章节 49-49"
+    },
+    {
+      "fileName": "第十章 死神来了？.txt",
+      "size": 10996,
+      "sizeLabel": "10.74 KB",
+      "description": "章节 50-50"
+    },
+    {
+      "fileName": "第十一章 谜底.txt",
+      "size": 17446,
+      "sizeLabel": "17.04 KB",
+      "description": "章节 51-51"
+    },
+    {
+      "fileName": "第十二章 回归与……最后的恐怖.txt",
+      "size": 10863,
+      "sizeLabel": "10.61 KB",
+      "description": "章节 52-52"
+    },
+    {
+      "fileName": "第一章 柯银夜，柯银羽.txt",
+      "size": 10078,
+      "sizeLabel": "9.84 KB",
+      "description": "章节 53-53"
+    },
+    {
+      "fileName": "第二章 地狱契约.txt",
+      "size": 10661,
+      "sizeLabel": "10.41 KB",
+      "description": "章节 54-54"
+    },
+    {
+      "fileName": "第三章 裂痕.txt",
+      "size": 8245,
+      "sizeLabel": "8.05 KB",
+      "description": "章节 55-55"
+    },
+    {
+      "fileName": "第四章 异变.txt",
+      "size": 4726,
+      "sizeLabel": "4.62 KB",
+      "description": "章节 56-56"
+    },
+    {
+      "fileName": "第五章 封印魔王的方法.txt",
+      "size": 8140,
+      "sizeLabel": "7.95 KB",
+      "description": "章节 57-57"
+    },
+    {
+      "fileName": "第六章 空无一人的小镇.txt",
+      "size": 11092,
+      "sizeLabel": "10.83 KB",
+      "description": "章节 58-58"
+    },
+    {
+      "fileName": "第七章 妖异之月.txt",
+      "size": 7493,
+      "sizeLabel": "7.32 KB",
+      "description": "章节 59-59"
+    },
+    {
+      "fileName": "第八章 异空间.txt",
+      "size": 9288,
+      "sizeLabel": "9.07 KB",
+      "description": "章节 60-60"
+    },
+    {
+      "fileName": "第九章 小丑出现.txt",
+      "size": 10942,
+      "sizeLabel": "10.69 KB",
+      "description": "章节 61-61"
+    },
+    {
+      "fileName": "第十章 憎恨之眼.txt",
+      "size": 12023,
+      "sizeLabel": "11.74 KB",
+      "description": "章节 62-62"
+    },
+    {
+      "fileName": "第十一章 魔王.txt",
+      "size": 15247,
+      "sizeLabel": "14.89 KB",
+      "description": "章节 63-63"
+    },
+    {
+      "fileName": "第十二章 血字的生路.txt",
+      "size": 18823,
+      "sizeLabel": "18.38 KB",
+      "description": "章节 64-64"
+    },
+    {
+      "fileName": "第十三章 十米…….txt",
+      "size": 11363,
+      "sizeLabel": "11.1 KB",
+      "description": "章节 65-65"
+    },
+    {
+      "fileName": "第十四章 因为是你…….txt",
+      "size": 20581,
+      "sizeLabel": "20.1 KB",
+      "description": "章节 66-66"
+    },
+    {
+      "fileName": "第一章 毁灭的序曲.txt",
+      "size": 10575,
+      "sizeLabel": "10.33 KB",
+      "description": "章节 67-67"
+    },
+    {
+      "fileName": "第二章 两道血字指示.txt",
+      "size": 11461,
+      "sizeLabel": "11.19 KB",
+      "description": "章节 68-68"
+    },
+    {
+      "fileName": "第三章 七名乘客.txt",
+      "size": 6371,
+      "sizeLabel": "6.22 KB",
+      "description": "章节 69-69"
+    },
+    {
+      "fileName": "第四章 消失.txt",
+      "size": 10483,
+      "sizeLabel": "10.24 KB",
+      "description": "章节 70-70"
+    },
+    {
+      "fileName": "第五章 手印.txt",
+      "size": 8913,
+      "sizeLabel": "8.7 KB",
+      "description": "章节 71-71"
+    },
+    {
+      "fileName": "第六章 十字.txt",
+      "size": 11085,
+      "sizeLabel": "10.83 KB",
+      "description": "章节 72-72"
+    },
+    {
+      "fileName": "第七章 镜子.txt",
+      "size": 8352,
+      "sizeLabel": "8.16 KB",
+      "description": "章节 73-73"
+    },
+    {
+      "fileName": "第八章 厉鬼的真面目.txt",
+      "size": 11461,
+      "sizeLabel": "11.19 KB",
+      "description": "章节 74-74"
+    },
+    {
+      "fileName": "第九章 李隐死了？.txt",
+      "size": 7967,
+      "sizeLabel": "7.78 KB",
+      "description": "章节 75-75"
+    },
+    {
+      "fileName": "第十章 决断.txt",
+      "size": 7520,
+      "sizeLabel": "7.34 KB",
+      "description": "章节 76-76"
+    },
+    {
+      "fileName": "第十一章 上？下？.txt",
+      "size": 11695,
+      "sizeLabel": "11.42 KB",
+      "description": "章节 77-77"
+    },
+    {
+      "fileName": "第十二章 索命鬼影.txt",
+      "size": 14030,
+      "sizeLabel": "13.7 KB",
+      "description": "章节 78-78"
+    },
+    {
+      "fileName": "第十三章 现形.txt",
+      "size": 11397,
+      "sizeLabel": "11.13 KB",
+      "description": "章节 79-79"
+    },
+    {
+      "fileName": "第十四章 无限循环.txt",
+      "size": 12033,
+      "sizeLabel": "11.75 KB",
+      "description": "章节 80-80"
+    },
+    {
+      "fileName": "第一章 兄弟.txt",
+      "size": 12201,
+      "sizeLabel": "11.92 KB",
+      "description": "章节 81-81"
+    },
+    {
+      "fileName": "第二章 短暂的宁静之日.txt",
+      "size": 9426,
+      "sizeLabel": "9.21 KB",
+      "description": "章节 82-82"
+    },
+    {
+      "fileName": "第三章 星辰和敏.txt",
+      "size": 14727,
+      "sizeLabel": "14.38 KB",
+      "description": "章节 83-83"
+    },
+    {
+      "fileName": "第四章 李隐的算计.txt",
+      "size": 9832,
+      "sizeLabel": "9.6 KB",
+      "description": "章节 84-84"
+    },
+    {
+      "fileName": "第五章 试探.txt",
+      "size": 11774,
+      "sizeLabel": "11.5 KB",
+      "description": "章节 85-85"
+    },
+    {
+      "fileName": "第六章 大年夜.txt",
+      "size": 8702,
+      "sizeLabel": "8.5 KB",
+      "description": "章节 86-86"
+    },
+    {
+      "fileName": "第七章 深雨.txt",
+      "size": 9788,
+      "sizeLabel": "9.56 KB",
+      "description": "章节 87-87"
+    },
+    {
+      "fileName": "第八章 未知者的忠告.txt",
+      "size": 11538,
+      "sizeLabel": "11.27 KB",
+      "description": "章节 88-88"
+    },
+    {
+      "fileName": "第九章 是真？是假？.txt",
+      "size": 7102,
+      "sizeLabel": "6.94 KB",
+      "description": "章节 89-89"
+    },
+    {
+      "fileName": "第十章 背后的是……（一）.txt",
+      "size": 9963,
+      "sizeLabel": "9.73 KB",
+      "description": "章节 90-90"
+    },
+    {
+      "fileName": "第十一章 背后的是……（二）.txt",
+      "size": 6788,
+      "sizeLabel": "6.63 KB",
+      "description": "章节 91-91"
+    },
+    {
+      "fileName": "第十二章 背后的是……（三）.txt",
+      "size": 8540,
+      "sizeLabel": "8.34 KB",
+      "description": "章节 92-92"
+    },
+    {
+      "fileName": "第十三章 背后的是……（四）.txt",
+      "size": 10913,
+      "sizeLabel": "10.66 KB",
+      "description": "章节 93-93"
+    },
+    {
+      "fileName": "第十四章 背后的是……（五）.txt",
+      "size": 10354,
+      "sizeLabel": "10.11 KB",
+      "description": "章节 94-94"
+    },
+    {
+      "fileName": "第十五章 恶魔之子.txt",
+      "size": 10772,
+      "sizeLabel": "10.52 KB",
+      "description": "章节 95-95"
+    },
+    {
+      "fileName": "第十六章 不能回头的理由.txt",
+      "size": 14977,
+      "sizeLabel": "14.63 KB",
+      "description": "章节 96-96"
+    },
+    {
+      "fileName": "第一章 布局，操控，制衡.txt",
+      "size": 13143,
+      "sizeLabel": "12.83 KB",
+      "description": "章节 97-97"
+    },
+    {
+      "fileName": "第二章 龙有逆鳞，触之即死！.txt",
+      "size": 11216,
+      "sizeLabel": "10.95 KB",
+      "description": "章节 98-98"
+    },
+    {
+      "fileName": "第三章 神秘来电.txt",
+      "size": 14260,
+      "sizeLabel": "13.93 KB",
+      "description": "章节 99-99"
+    },
+    {
+      "fileName": "第四章 不详的预感.txt",
+      "size": 11424,
+      "sizeLabel": "11.16 KB",
+      "description": "章节 100-100"
+    },
+    {
+      "fileName": "第五章 不要穿上它…….txt",
+      "size": 14746,
+      "sizeLabel": "14.4 KB",
+      "description": "章节 101-101"
+    },
+    {
+      "fileName": "第六章 和恶魔的交易.txt",
+      "size": 15168,
+      "sizeLabel": "14.81 KB",
+      "description": "章节 102-102"
+    },
+    {
+      "fileName": "第七章 夏渊的过去.txt",
+      "size": 18786,
+      "sizeLabel": "18.35 KB",
+      "description": "章节 103-103"
+    },
+    {
+      "fileName": "第八章 摇滚和生路.txt",
+      "size": 14405,
+      "sizeLabel": "14.07 KB",
+      "description": "章节 104-104"
+    },
+    {
+      "fileName": "第九章 来源.txt",
+      "size": 14186,
+      "sizeLabel": "13.85 KB",
+      "description": "章节 105-105"
+    },
+    {
+      "fileName": "第十章 星辰的发现.txt",
+      "size": 10906,
+      "sizeLabel": "10.65 KB",
+      "description": "章节 106-106"
+    },
+    {
+      "fileName": "第十一章 剪刀.txt",
+      "size": 13945,
+      "sizeLabel": "13.62 KB",
+      "description": "章节 107-107"
+    },
+    {
+      "fileName": "第十二章 选择.txt",
+      "size": 14395,
+      "sizeLabel": "14.06 KB",
+      "description": "章节 108-108"
+    },
+    {
+      "fileName": "第十三章 汹涌而来的魔性.txt",
+      "size": 13826,
+      "sizeLabel": "13.5 KB",
+      "description": "章节 109-109"
+    },
+    {
+      "fileName": "第十四章 不断接近的死神.txt",
+      "size": 10782,
+      "sizeLabel": "10.53 KB",
+      "description": "章节 110-110"
+    },
+    {
+      "fileName": "第一章 黑洞.txt",
+      "size": 14657,
+      "sizeLabel": "14.31 KB",
+      "description": "章节 111-111"
+    },
+    {
+      "fileName": "第二章 深渊.txt",
+      "size": 16210,
+      "sizeLabel": "15.83 KB",
+      "description": "章节 112-112"
+    },
+    {
+      "fileName": "第三章 五名新住户.txt",
+      "size": 15092,
+      "sizeLabel": "14.74 KB",
+      "description": "章节 113-113"
+    },
+    {
+      "fileName": "第四章 寻找六颗人头.txt",
+      "size": 16166,
+      "sizeLabel": "15.79 KB",
+      "description": "章节 114-114"
+    },
+    {
+      "fileName": "第五章 恐怖的断头魔.txt",
+      "size": 16771,
+      "sizeLabel": "16.38 KB",
+      "description": "章节 115-115"
+    },
+    {
+      "fileName": "第六章 三名嫌疑人.txt",
+      "size": 14584,
+      "sizeLabel": "14.24 KB",
+      "description": "章节 116-116"
+    },
+    {
+      "fileName": "第七章 手表和可疑的女子.txt",
+      "size": 15370,
+      "sizeLabel": "15.01 KB",
+      "description": "章节 117-117"
+    },
+    {
+      "fileName": "第八章 死亡时间？预知能力？.txt",
+      "size": 14601,
+      "sizeLabel": "14.26 KB",
+      "description": "章节 118-118"
+    },
+    {
+      "fileName": "第九章 照片.txt",
+      "size": 11546,
+      "sizeLabel": "11.28 KB",
+      "description": "章节 119-119"
+    },
+    {
+      "fileName": "第十章 扑朔迷离.txt",
+      "size": 13754,
+      "sizeLabel": "13.43 KB",
+      "description": "章节 120-120"
+    },
+    {
+      "fileName": "第十一章 渐近的黑暗.txt",
+      "size": 15415,
+      "sizeLabel": "15.05 KB",
+      "description": "章节 121-121"
+    },
+    {
+      "fileName": "第十二章 唐枫.txt",
+      "size": 12528,
+      "sizeLabel": "12.23 KB",
+      "description": "章节 122-122"
+    },
+    {
+      "fileName": "第十三章 半张脸.txt",
+      "size": 13658,
+      "sizeLabel": "13.34 KB",
+      "description": "章节 123-123"
+    },
+    {
+      "fileName": "第十四章 共同点.txt",
+      "size": 14227,
+      "sizeLabel": "13.89 KB",
+      "description": "章节 124-124"
+    },
+    {
+      "fileName": "第十五章 尹俊贤.txt",
+      "size": 16009,
+      "sizeLabel": "15.63 KB",
+      "description": "章节 125-125"
+    },
+    {
+      "fileName": "第十六章 手帕.txt",
+      "size": 15273,
+      "sizeLabel": "14.92 KB",
+      "description": "章节 126-126"
+    },
+    {
+      "fileName": "第十七章 最恐怖的假设.txt",
+      "size": 15386,
+      "sizeLabel": "15.03 KB",
+      "description": "章节 127-127"
+    },
+    {
+      "fileName": "第十八章 恶魔的条件.txt",
+      "size": 14627,
+      "sizeLabel": "14.28 KB",
+      "description": "章节 128-128"
+    },
+    {
+      "fileName": "第十九章 金色神国.txt",
+      "size": 15788,
+      "sizeLabel": "15.42 KB",
+      "description": "章节 129-129"
+    },
+    {
+      "fileName": "第二十章 重重谜团.txt",
+      "size": 16006,
+      "sizeLabel": "15.63 KB",
+      "description": "章节 130-130"
+    },
+    {
+      "fileName": "第二十一章 LD.txt",
+      "size": 14972,
+      "sizeLabel": "14.62 KB",
+      "description": "章节 131-131"
+    },
+    {
+      "fileName": "第二十二章 眼镜.txt",
+      "size": 11521,
+      "sizeLabel": "11.25 KB",
+      "description": "章节 132-132"
+    },
+    {
+      "fileName": "第二十三章 断头魔，不止一个？.txt",
+      "size": 13887,
+      "sizeLabel": "13.56 KB",
+      "description": "章节 133-133"
+    },
+    {
+      "fileName": "第二十四章 真正的恐怖开始.txt",
+      "size": 13854,
+      "sizeLabel": "13.53 KB",
+      "description": "章节 134-134"
+    },
+    {
+      "fileName": "第二十五章 伊莣的留言.txt",
+      "size": 14222,
+      "sizeLabel": "13.89 KB",
+      "description": "章节 135-135"
+    },
+    {
+      "fileName": "第二十六章 我相信你.txt",
+      "size": 17423,
+      "sizeLabel": "17.01 KB",
+      "description": "章节 136-136"
+    },
+    {
+      "fileName": "第二十七章 断头魔和六颗人头.txt",
+      "size": 13900,
+      "sizeLabel": "13.57 KB",
+      "description": "章节 137-137"
+    },
+    {
+      "fileName": "第二十八章 通向地狱的陷阱.txt",
+      "size": 18103,
+      "sizeLabel": "17.68 KB",
+      "description": "章节 138-138"
+    },
+    {
+      "fileName": "第二十九章 没有神存在的世界.txt",
+      "size": 15016,
+      "sizeLabel": "14.66 KB",
+      "description": "章节 139-139"
+    },
+    {
+      "fileName": "第三十章 生与死，最终的选择.txt",
+      "size": 17631,
+      "sizeLabel": "17.22 KB",
+      "description": "章节 140-140"
+    },
+    {
+      "fileName": "第三十一章 誓约.txt",
+      "size": 17628,
+      "sizeLabel": "17.21 KB",
+      "description": "章节 141-141"
+    },
+    {
+      "fileName": "第一章 诡秘的油画.txt",
+      "size": 15459,
+      "sizeLabel": "15.1 KB",
+      "description": "章节 142-142"
+    },
+    {
+      "fileName": "第二章 超级杀手“睡美人”.txt",
+      "size": 15053,
+      "sizeLabel": "14.7 KB",
+      "description": "章节 143-143"
+    },
+    {
+      "fileName": "第三章 为鬼魂送信.txt",
+      "size": 16072,
+      "sizeLabel": "15.7 KB",
+      "description": "章节 144-144"
+    },
+    {
+      "fileName": "第四章 多重生路的假设.txt",
+      "size": 16058,
+      "sizeLabel": "15.68 KB",
+      "description": "章节 145-145"
+    },
+    {
+      "fileName": "第五章 影子.txt",
+      "size": 11672,
+      "sizeLabel": "11.4 KB",
+      "description": "章节 146-146"
+    },
+    {
+      "fileName": "第六章 为了爱她而活.txt",
+      "size": 12099,
+      "sizeLabel": "11.82 KB",
+      "description": "章节 147-147"
+    },
+    {
+      "fileName": "第七章 进入月影，日冕馆.txt",
+      "size": 12209,
+      "sizeLabel": "11.92 KB",
+      "description": "章节 148-148"
+    },
+    {
+      "fileName": "第八章 第一封信.txt",
+      "size": 15051,
+      "sizeLabel": "14.7 KB",
+      "description": "章节 149-149"
+    },
+    {
+      "fileName": "第九章 幽冥彼方的爱.txt",
+      "size": 13309,
+      "sizeLabel": "13 KB",
+      "description": "章节 150-150"
+    },
+    {
+      "fileName": "第十章 恶魔.txt",
+      "size": 13374,
+      "sizeLabel": "13.06 KB",
+      "description": "章节 151-151"
+    },
+    {
+      "fileName": "第十一章 父女.txt",
+      "size": 14508,
+      "sizeLabel": "14.17 KB",
+      "description": "章节 152-152"
+    },
+    {
+      "fileName": "第十二章 黑暗中的探索.txt",
+      "size": 14730,
+      "sizeLabel": "14.38 KB",
+      "description": "章节 153-153"
+    },
+    {
+      "fileName": "第十三章 扭曲的逻辑.txt",
+      "size": 13194,
+      "sizeLabel": "12.88 KB",
+      "description": "章节 154-154"
+    },
+    {
+      "fileName": "第十四章 两封伪造的回信.txt",
+      "size": 13244,
+      "sizeLabel": "12.93 KB",
+      "description": "章节 155-155"
+    },
+    {
+      "fileName": "第十五章 慕容蜃和深雨.txt",
+      "size": 13867,
+      "sizeLabel": "13.54 KB",
+      "description": "章节 156-156"
+    },
+    {
+      "fileName": "第十六章 他的名字.txt",
+      "size": 13284,
+      "sizeLabel": "12.97 KB",
+      "description": "章节 157-157"
+    },
+    {
+      "fileName": "第十七章 血字的未知恐怖.txt",
+      "size": 13290,
+      "sizeLabel": "12.98 KB",
+      "description": "章节 158-158"
+    },
+    {
+      "fileName": "第十八章 真面目.txt",
+      "size": 15391,
+      "sizeLabel": "15.03 KB",
+      "description": "章节 159-159"
+    },
+    {
+      "fileName": "第十九章 不断失控的回信.txt",
+      "size": 13340,
+      "sizeLabel": "13.03 KB",
+      "description": "章节 160-160"
+    },
+    {
+      "fileName": "第二十章 生路？死路？.txt",
+      "size": 17320,
+      "sizeLabel": "16.91 KB",
+      "description": "章节 161-161"
+    },
+    {
+      "fileName": "第二十一章 被分隔的两人.txt",
+      "size": 13392,
+      "sizeLabel": "13.08 KB",
+      "description": "章节 162-162"
+    },
+    {
+      "fileName": "第二十二章 公寓隐藏的规则.txt",
+      "size": 13983,
+      "sizeLabel": "13.66 KB",
+      "description": "章节 163-163"
+    },
+    {
+      "fileName": "第二十三章 蒲靡灵的日记.txt",
+      "size": 519011,
+      "sizeLabel": "506.85 KB",
+      "description": "章节 164-164"
+    },
+    {
+      "fileName": "第十三章 恶魔的传承 第二十三章 骸骨.txt",
+      "size": 289561,
+      "sizeLabel": "282.77 KB",
+      "description": "章节 165-165"
+    },
+    {
+      "fileName": "第十四章 幽灵船 第十八章 诅咒的根源.txt",
+      "size": 90996,
+      "sizeLabel": "88.86 KB",
+      "description": "章节 166-166"
+    },
+    {
+      "fileName": "第十五章 魔棺 第六章 四个人.txt",
+      "size": 3894899,
+      "sizeLabel": "3.71 MB",
+      "description": "章节 167-167"
+    }
+  ]
+}
